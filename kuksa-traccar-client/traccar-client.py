@@ -86,9 +86,14 @@ def main(args):
 
             url=traccar_server+"/?"+request
             print("Will GET "+str(url))
-            r = requests.get(url)
-            if r.status_code != 200:
-                print("Error contacting Traccar. HTTP status "+str(r.status_code))
+            try:
+                r = requests.get(url, timeout=10)
+                if r.status_code != 200:
+                    print("Error from Traccar server. HTTP status "+str(r.status_code))
+            except requests.exceptions.RequestException as e:
+                    print("Error contacting Traccar server:"+str(e))
+
+            
         else:
             print("No valid position. Not posting")
 
