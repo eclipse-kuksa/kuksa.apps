@@ -1,10 +1,23 @@
+#!/usr/bin/python3
+
+# Copyright (c) 2018 Eclipse KUKSA project
+#
+# This program and the accompanying materials are made available under the
+# terms of the Eclipse Public License 2.0 which is available at
+# http://www.eclipse.org/legal/epl-2.0
+#
+# SPDX-License-Identifier: EPL-2.0
+#
+# Contributors: Robert Bosch GmbH
+#
+# This provider gets data from gpsd (http://www.catb.org/gpsd/)
+
 from gps3 import gps3
 import sys
 import threading
 
 
 position = { "valid":False, "lat":"0", "lon":"0", "alt":"0", "hdop":"0", "speed":"0" }
-t=None
 
 def loop(gpsd_socket):
     global position
@@ -14,8 +27,7 @@ def loop(gpsd_socket):
     for new_data in gpsd_socket:
         if new_data:
             data_stream.unpack(new_data)
-            print('Altitude = ', data_stream.TPV['alt'])
-            print('Latitude = ', data_stream.TPV['lat'])
+            print("GPSD data....")
 
             position['lat']=data_stream.TPV['lat']
             position['lon']=data_stream.TPV['lon']            

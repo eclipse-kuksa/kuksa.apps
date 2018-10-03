@@ -22,6 +22,8 @@ import importlib
 import time
 from providers import *
 from os import path
+from datetime import datetime
+import requests
 
 config_candidates=['traccar-client.ini', '/etc/traccar-client.ini']
 
@@ -56,7 +58,8 @@ def main(args):
 
     traccar_cfg = config['Traccar']
     traccar_server              = traccar_cfg.get('server','http://localhost:8080')
-    traccar_publishing_interval = traccar_cfg.get('interval','30')
+    traccar_identifier = traccar_cfg.get('identifer','000000')
+    traccar_publishing_interval = traccar_cfg.getint('interval',30)
 
     if "Provider" not in config:
         print("Provider section missing from configuration, exiting")
@@ -67,16 +70,31 @@ def main(args):
 
     print("Will connect to "+str(traccar_server))
     print("Will publish location every "+str(traccar_publishing_interval))
+    print("My id is  "+str(traccar_identifier))
+    
 
     print("Location data will be provided by "+str(location_provider))
 
-    print("Trying to intantiante "+str(location_provider)+" provider")
+    print("Trying to instantiate "+str(location_provider)+" provider")
     provider=instantiateProvider(location_provider,config)
 
     while True:
         pos=provider.getPosition()
         print("Current pos "+str(pos))
-        time.sleep(5)
+        if pos['valid']:
+            request="id={}&lat={}&lon={}&timestamp={}&hdop={}&altitude={}&speed={}".format(traccar_identifier,pos['lat'],pos['lon'],datetime.now().isoformat(),pos['hdop'],pos['alt'],pos['speed'])
+
+            url=traccar_server+"/?"+request
+            print("Will GET "+str(url))
+            r = requests.get(url)
+            if r.status_code != 200:
+                print("Error contacting Traccar. HTTP status "+str(r.status_code))
+        else:
+            print("No valid position. Not posting")
+
+
+            #post to Traccar
+        time.sleep(traccar_publishing_interval)
 
 
 if __name__ == "__main__":
