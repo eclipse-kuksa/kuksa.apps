@@ -15,12 +15,13 @@
 from gps3 import gps3
 import sys
 import threading
+lock=threading.Lock()
 
 
 position = { "valid":False, "lat":"0", "lon":"0", "alt":"0", "hdop":"0", "speed":"0" }
 
 def loop(gpsd_socket):
-    global position
+    global position,lock
     print("gpsd receive loop started")
     data_stream = gps3.DataStream()
     gpsd_socket.watch()
@@ -29,6 +30,7 @@ def loop(gpsd_socket):
             data_stream.unpack(new_data)
             print("GPSD data....")
 
+            lock.acquire()
             position['lat']=data_stream.TPV['lat']
             position['lon']=data_stream.TPV['lon']            
             position['alt']=data_stream.TPV['alt']
@@ -41,12 +43,15 @@ def loop(gpsd_socket):
                 position['valid']=False
             else:
                 position['valid']=True
+            lock.release()
 
 
 def getPosition():
-    global position
-    print("Pos object is "+str(position))
-    return position
+    global position, lock
+    lock.acquire()
+    p=position
+    lock.release()
+    return p
 
 
 def connect(host,port):
