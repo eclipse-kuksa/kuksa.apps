@@ -65,8 +65,8 @@ def main(args):
         print("Provider section missing from configuration, exiting")
         sys.exit(-1)
 
-    provider_cfg = config['Traccar']
-    location_provider = traccar_cfg.get('provider','gpsd')
+    provider_cfg = config['Provider']
+    location_provider = provider_cfg.get('provider','gpsd')
 
     print("Will connect to "+str(traccar_server))
     print("Will publish location every "+str(traccar_publishing_interval))
