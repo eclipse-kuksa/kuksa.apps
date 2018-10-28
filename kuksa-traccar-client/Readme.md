@@ -39,3 +39,10 @@ _Caveat_: It will only work if your phone has a _real_ GPS fix. (Just becasue Go
 
 ## Test deplyoment
 The start.sh script is suitable to be used for kuksa-hawkbit prototype in kuksa.invehicle
+
+### Kill and mark uninstalled
+`pkill -ef  traccar-client.py`
+
+If pkill is not available use grep and xargs.
+
+`rm /tmp/gps_installed`
