@@ -6,10 +6,11 @@ Does not use any KUKSA cloud service, instead it demonstrates how the platform c
 
 ## Requirements
 The client can access GPSD. For this it uses the gps3 library: https://pypi.org/project/gps3 or  https://github.com/wadda/gps3 
+It uses python requests for talking to Traccar
 
 Install it with 
 
-`sudo pip3 install gps3`
+`sudo pip3 install -r ./requirements.txt`
 
 
 ## Configuration file
@@ -39,6 +40,13 @@ _Caveat_: It will only work if your phone has a _real_ GPS fix. (Just becasue Go
 
 ## Test deplyoment
 The start.sh script is suitable to be used for kuksa-hawkbit prototype in kuksa.invehicle
+
+## Build install images
+Small helper to build app packages suitable to be deployed with the prototype kuksa-downloader, in this folder execute
+
+`./mktestpackage.sh`
+
+Build SIMPLE_ and DOCKER_images. to save time (or if you have no docker installed) set `BUILD_DOCKER` to 0 in the script
 
 ### Kill and mark uninstalled
 `pkill -ef  traccar-client.py`
