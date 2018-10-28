@@ -36,3 +36,6 @@ https://play.google.com/store/apps/details?id=io.github.tiagoshibata.gpsdclient&
 Start it, and let is stream to the ip of the computer you run GPSD on port 3333.
 
 _Caveat_: It will only work if your phone has a _real_ GPS fix. (Just becasue Google maps shows some location guestimated form WiFi/cell towers is not enough)
+
+## Test deplyoment
+The start.sh script is suitable to be used for kuksa-hawkbit prototype in kuksa.invehicle
