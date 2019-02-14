@@ -14,4 +14,4 @@ Contributors:
 
 # Kuksa-Apps Repo
 
-Will contain Rover developments initially
+This repository constains application use-cases used along with the Eclipse Kuksa environment to be distributed along with the appstore, hawkBit, and the invehicle platform.
