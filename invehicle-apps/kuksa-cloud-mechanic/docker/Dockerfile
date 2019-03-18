@@ -1,12 +1,12 @@
 #Building everything
 FROM arm64v8/alpine:3.8 AS build-env
 
-COPY remoteAccess/docker/qemu-aarch64-static /usr/bin/qemu-aarch64-static
+COPY kuksa-cloud-mechanic/docker/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
 RUN apk update && apk add cmake alpine-sdk boost-dev boost-system boost-thread openssl-dev libstdc++
 
 ADD . /app
-WORKDIR /app/remoteAccess
+WORKDIR /app/kuksa-cloud-mechanic
 
 RUN rm -rf build && mkdir build && cd build && cmake ../
 RUN cd build && make

@@ -58,8 +58,8 @@ function build {
 
     # build image
     cd ../../
-    docker build --platform linux/$ARCH -f ./remoteAccess/docker/Dockerfile.build -t ${ARCH}/${NAME}:${VERSION} .
-    cd remoteAccess/docker
+    docker build --platform linux/$ARCH -f ./kuksa-cloud-mechanic/docker/Dockerfile.build -t ${ARCH}/${NAME}:${VERSION} .
+    cd kuksa-cloud-mechanic/docker
 
     # cleanup
     rm -f Dockerfile.build
