@@ -13,11 +13,11 @@
 import json,yaml
 import os
 import subprocess
-import datetime
+from datetime import datetime
 import requests
 from requests import Session, HTTPError
 
-def getAppIDinHAwkbit(config):
+def getAppIDinHawkbit(config):
      # get the app id from hawkbit which was created by the appstore
     http = Session()
     http.auth = (config['hawkbit']['user'], config['hawkbit']['password'])
@@ -32,7 +32,11 @@ def getAppIDinHAwkbit(config):
     if contentSize == 1 :
        return respJson['content'][0]['id']
        print("Got the app ID in Hawkbit.")
+    elif contentSize == 0 :
+       print("No app with the passed name found in Hawkbit.")
+       exit(0)
     else :
+       print(contentSize)
        print("I am confused!. There are more than one app with the same and version. I dont know what to do. Therefore I exit!")
        exit(0)
 
@@ -66,7 +70,7 @@ def publish_app(config_file, upload_image=True):
     http.auth = (config['hawkbit']['user'], config['hawkbit']['password'])
    
     # The app (software module) is created by the app store.
-    app_id = getAppIDinHAwkbit(config)
+    app_id = getAppIDinHawkbit(config)
 
     # upload the config artifact to Hawkbit directly
 
@@ -109,7 +113,7 @@ def __handle_error(response):
         if content:
             content = json.loads(content.decode("utf-8"))
             error = content.get('message')
-        #print(error)
+        print(error)
         return -1
     return 0
 
@@ -161,7 +165,7 @@ def createAppinAppstore(config_file) :
     data['version'] = config['docker']['version']
     data['description'] = config['docker']['description']
     data['owner'] = config['docker']['owner']
-    data['publishdate'] = "2018-10-01T06:50:03.000+0000" # TODO
+    data['publishdate'] = datetime.utcnow().isoformat()
     data['appcategory']['id'] = catID
     response = requests.post('http://{}/api/1.0/app'.format(config['appstore']['ip-address']), headers=headers, data=json.dumps(data))
     if __handle_error(response) != 0:
@@ -191,7 +195,7 @@ def deleteExistingArtifacts(config_file) :
     http = Session()
     http.auth = (config['hawkbit']['user'], config['hawkbit']['password'])
 
-    appID = getAppIDinHAwkbit(config)
+    appID = getAppIDinHawkbit(config)
     
     #get artifacts
     app_response = http.get(
