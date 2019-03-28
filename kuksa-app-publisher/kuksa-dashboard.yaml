@@ -1,0 +1,35 @@
+# Make sure you donot use tabs for indentation
+# Put all app related infos here
+docker :
+   image : "arm32v6/cloud-dashboard:0.1.0"
+   name : "Dashboard"
+   version : "0.1.0"
+   owner : "Bosch"
+   description : "This is a cloud dashboard app"
+   config :
+      network_mode : "host"
+      volumes:
+         /tmp/: 
+            bind: '/mnt/' 
+            mode: 'rw'
+      environment:
+         HONOIP: "11.111.111.11"
+         HONOPORT: "1883"
+         HONODEVICE: "sensor1"
+         HONOPW: "hono-secret"
+         TOKEN: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJFeGFtcGxlIEpXVCIsImlzcyI6IkVjbGlwc2Uga3Vrc2EiLCJhZG1pbiI6dHJ1ZSwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE2MDkzNzI4MDB9.lxYf-N0C66NgJiinrY_pgVpZOxgH0ppnbMsdKfNiQjbMqYTY_nEpXufmjquvBaxiYsRb_3ScXA__gmviWj_PQoU3apuMVxJjAY6xrwaXFw7g-daUi21yqLSfLptH2vqQzhA_Y1LU6u7SjeiEcGRZrgq_bHnjMM61EVDSnKGCClo"
+         EMAIL_SERVER: "11.111.111.111"
+         EMAIL_PORT: "9020"
+      
+# Put all the hawkbit related infos here
+hawkbit :
+   ip-address : "http://11.11.111.11:8080"
+   target : "kuksa_Donglev2"
+   user : "admin"
+   password : "admin"
+ 
+# Put all appstore infos here  
+appstore :
+   ip-address : "localhost:8082"
+   category : "kuksa-test"
+   auth : "Basic YWRtaW46YWRtaW4="

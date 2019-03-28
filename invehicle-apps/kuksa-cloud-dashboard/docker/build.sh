@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-VERSION=$(git log -1 --pretty=format:%h)
+VERSION="0.1.0"
+NAME="cloud-dashboard"
+
 if [ -z "$VERSION" ]; then
     echo "Failed to extract version string" 1>&2
     exit 1
@@ -14,6 +16,7 @@ fi
 
 function build {
     ARCH=$1
+
 
     # generate Dockerfile.build
     case ${ARCH} in
@@ -29,13 +32,22 @@ function build {
         fi
         cp Dockerfile Dockerfile.build
         ;;
-    'armhf')
+     'arm32v7')
         cp /usr/bin/qemu-arm-static ./
         if [ "$?" != "0" ]; then
             echo "Please install the qemu-user-static package" 1>&2
             exit 1
         fi
-        sed -e "s/arm64v8/armhf/g" Dockerfile > Dockerfile.build
+        sed -e "s/arm64v8/arm32v7/g" Dockerfile > Dockerfile.build
+        sed -i -e "s/qemu-aarch64-static/qemu-arm-static/g" Dockerfile.build
+        ;;
+    'arm32v6')
+        cp /usr/bin/qemu-arm-static ./
+        if [ "$?" != "0" ]; then
+            echo "Please install the qemu-user-static package" 1>&2
+            exit 1
+        fi
+        sed -e "s/arm64v8/arm32v6/g" Dockerfile > Dockerfile.build
         sed -i -e "s/qemu-aarch64-static/qemu-arm-static/g" Dockerfile.build
         ;;
     *)
@@ -45,7 +57,9 @@ function build {
     esac
 
     # build image
-    docker build --platform linux/$ARCH -f ./Dockerfile.build -t ${ARCH}/kuksa-traccar:${VERSION} .
+    cd ../../
+    docker build --platform linux/$ARCH -f ./kuksa-cloud-dashboard/docker/Dockerfile.build -t ${ARCH}/${NAME}:${VERSION} .
+	cd kuksa-cloud-dashboard/docker
 
     # cleanup
     rm -f Dockerfile.build
@@ -55,7 +69,7 @@ function build {
 
 ARCHS="$@"
 if [ -z "$ARCHS" ]; then
-    ARCHS="amd64 arm64 armhf"
+    ARCHS="amd64 arm64 arm32v6"
 fi
 
 for ARCH in $ARCHS; do
