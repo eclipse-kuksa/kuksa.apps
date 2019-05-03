@@ -1,18 +1,16 @@
 FROM arm64v8/python:3.6-alpine AS build-env
 
-COPY qemu-aarch64-static /usr/bin/qemu-aarch64-static
+COPY kuksa-traccar-client/docker/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
 
-ADD . /app
+ADD ./kuksa-traccar-client/ /app
 WORKDIR /app
-COPY requirements.txt ./
+COPY kuksa-traccar-client/requirements.txt ./
 RUN pip install --target=./ --no-cache-dir -r requirements.txt
 RUN ls /usr/local/lib
 RUN rm ./requirements.txt
 RUN rm /usr/bin/qemu-aarch64-static
 WORKDIR /app
-#CMD python -u traccar-client.py
-#CMD ["traccar-client.py"]
 
 
 FROM arm64v8/python:3.6-alpine
