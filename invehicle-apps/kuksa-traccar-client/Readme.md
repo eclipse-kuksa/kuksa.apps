@@ -12,12 +12,47 @@ Install it with
 
 `sudo pip3 install -r ./requirements.txt`
 
+KUKSA-traccar-client needs a running traccar instance to connect to. Traccar installation instructions can be found here https://www.traccar.org/.
+kuksa-traccar-client uses the OSMAND protocol, which usuall is available at port 5055 of a running traccar instance 
 
 ## Configuration file
-The client triess to read traccar-client.ini in the current working directory, if that file is not found it tries /etc/traccar-client.ini
+The client tries to read traccar-client.ini in the current working directory, if that file is not found it tries /etc/traccar-client.ini
+
+Here is the default configurationf or reference
+```
+[Traccar]
+#Host and port where Traccar is running. Needs to start with http or (better) https and can include port number
+server = http://127.0.0.1:5055
+# Reporting frequency: Decides how often (every n seconds) data should be send to Traccar. Note: This is independent from the speed of the providers. Always the last known position is send. Only if a provider can report, that no valid position is available, the message will be supressed
+interval = 1
+# an identifer identifies a device in the Traccar server
+identifer = 12345678
+
+
+
+[Provider]
+#Select which provider is used to acquire GPS data. Currently only gpsd and simplelog is supported
+provider = simplelog
+
+# Provider specific settings. 
+
+[Provider.gpsd]
+host = 127.0.0.1
+port = 2947
+
+[Provider.simplelog]
+#simplelog expects a simple CSV containing only lat/long positions and no timestamp
+file = simplelog_example.csv
+#simplelog assumes all logged positions are <interval> seconds apart. No interpolation is done, the position will just jump
+interval = 1
+```
+
+
 
 ## Testing
-How to get "real" GPS data easily on a PC.
+In default configuration kuksa-traccar-client plays GPS data from an included logfile. This is usually enough for testing. 
+
+here is a way how to get "real" GPS data easily on a PC with no GPS module.
 
 Install gpsd on your Linux machine. If your distro starts it automatically stop it. In Ubuntu like this:
 
@@ -38,19 +73,8 @@ Start it, and let is stream to the ip of the computer you run GPSD on port 3333.
 
 _Caveat_: It will only work if your phone has a _real_ GPS fix. (Just becasue Google maps shows some location guestimated form WiFi/cell towers is not enough)
 
-## Test deplyoment
-The start.sh script is suitable to be used for kuksa-hawkbit prototype in kuksa.invehicle
+## Build docker image
 
-## Build install images
-Small helper to build app packages suitable to be deployed with the prototype kuksa-downloader, in this folder execute
+Use the instructions available in the docker folder to build the docker image.
 
-`./mktestpackage.sh`
-
-Build SIMPLE_ and DOCKER_images. to save time (or if you have no docker installed) set `BUILD_DOCKER` to 0 in the script
-
-### Kill and mark uninstalled
-`pkill -ef  traccar-client.py`
-
-If pkill is not available use grep and xargs.
-
-`rm /tmp/gps_installed`
+Use the kuksa-publisher to publish the app in the kuksa-appstore.
