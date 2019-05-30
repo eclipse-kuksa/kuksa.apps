@@ -23,7 +23,7 @@ docker :
       
 # Put all the hawkbit related infos here
 hawkbit :
-   ip-address : "http://11.11.111.11:8080"
+   url: "http://11.11.111.11:8080"
    target : "kuksa_Donglev2"
    user : "admin"
    password : "admin"

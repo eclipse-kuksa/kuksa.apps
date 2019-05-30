@@ -22,7 +22,7 @@ def getAppIDinHawkbit(config):
     http = Session()
     http.auth = (config['hawkbit']['user'], config['hawkbit']['password'])
     app_response = http.get(
-        url='{}/rest/v1/softwaremodules?q=name%3D%3D{}%3Bversion%3D%3D{}'.format(config['hawkbit']['ip-address'], config['docker']['name'], config['docker']['version'])
+        url='{}/rest/v1/softwaremodules?q=name%3D%3D{}%3Bversion%3D%3D{}'.format(config['hawkbit']['url'], config['docker']['name'], config['docker']['version'])
     )
     if __handle_error(app_response) != 0:
        exit(0)  
@@ -75,7 +75,7 @@ def publish_app(config_file, upload_image=True):
     # upload the config artifact to Hawkbit directly
 
     config_response = http.post(
-        url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['ip-address'], app_id),
+        url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['url'], app_id),
         data={
             'filename': 'docker-container.json',
         },
@@ -90,7 +90,7 @@ def publish_app(config_file, upload_image=True):
 
     if app_image_file:
         image_response = http.post(
-            url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['ip-address'], app_id),
+            url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['url'], app_id),
             data={
                 'filename': 'docker-image.tar',
             },
@@ -179,7 +179,7 @@ def deleteArtifact(config, appID, artiID) :
    http = Session()
    http.auth = (config['hawkbit']['user'], config['hawkbit']['password'])
    app_response = http.delete(
-        url='{}/rest/v1/softwaremodules/{}/artifacts/{}'.format(config['hawkbit']['ip-address'], appID, artiID),
+        url='{}/rest/v1/softwaremodules/{}/artifacts/{}'.format(config['hawkbit']['url'], appID, artiID),
     )
    if __handle_error(app_response) != 0:
       exit(0)
@@ -199,7 +199,7 @@ def deleteExistingArtifacts(config_file) :
     
     #get artifacts
     app_response = http.get(
-        url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['ip-address'], appID),
+        url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['url'], appID),
     )
     if __handle_error(app_response) != 0:
        exit(0)
