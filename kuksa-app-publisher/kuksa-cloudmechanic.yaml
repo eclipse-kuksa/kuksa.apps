@@ -25,6 +25,6 @@ hawkbit :
  
 # Put all appstore infos here  
 appstore :
-   ip-address : "localhost:8082"
+   url : "http://localhost:8082"
    category : "kuksa-test"
    auth : "Basic YWRtaW46YWRtaW4="

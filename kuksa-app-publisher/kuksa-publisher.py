@@ -131,7 +131,7 @@ def createNewAppCategory(config ) :
    data = '{\"name\" : "" }'
    data = json.loads(data)
    data['name'] = config['appstore']['category']
-   response = requests.post('http://{}/api/1.0/appcategory'.format(config['appstore']['ip-address']), headers=headers, data=json.dumps(data))
+   response = requests.post('{}/api/1.0/appcategory'.format(config['appstore']['url']), headers=headers, data=json.dumps(data))
    if __handle_error(response) != 0:
       print("Okay! There is already the app category in the appstore but i am not able to get its ID :(, therefore I set appCategoryID = 1. ")
       return 1  #TODO fix this, check with appstore developers.
@@ -167,7 +167,7 @@ def createAppinAppstore(config_file) :
     data['owner'] = config['docker']['owner']
     data['publishdate'] = datetime.utcnow().isoformat()
     data['appcategory']['id'] = catID
-    response = requests.post('http://{}/api/1.0/app'.format(config['appstore']['ip-address']), headers=headers, data=json.dumps(data))
+    response = requests.post('{}/api/1.0/app'.format(config['appstore']['url']), headers=headers, data=json.dumps(data))
     if __handle_error(response) != 0:
        print("App already exists in the appstore. Therefore no new app created.")
        return
