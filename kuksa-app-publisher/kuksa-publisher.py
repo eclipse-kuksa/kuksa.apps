@@ -42,7 +42,7 @@ def getAppIDinHawkbit(config):
 
 def publish_app(config_file, upload_image=True):
     with open(config_file, mode='r') as __config_file:
-       y=yaml.load(__config_file)
+       y=yaml.safe_load(__config_file)
        config = json.dumps(y)
        config = json.loads(config)
     app_image_file = None
@@ -146,7 +146,7 @@ def createNewAppCategory(config ) :
 # Creates new app in appstore
 def createAppinAppstore(config_file) :
     with open(config_file, mode='r') as __config_file:
-       y=yaml.load(__config_file)
+       y=yaml.safe_load(__config_file)
        config = json.dumps(y)
        config = json.loads(config)
        
@@ -188,7 +188,7 @@ def deleteArtifact(config, appID, artiID) :
 # Creates new app in appstore
 def deleteExistingArtifacts(config_file) :
     with open(config_file, mode='r') as __config_file:
-       y=yaml.load(__config_file)
+       y=yaml.safe_load(__config_file)
        config = json.dumps(y)
        config = json.loads(config)
     
