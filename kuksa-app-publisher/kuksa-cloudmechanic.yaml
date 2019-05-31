@@ -18,13 +18,13 @@ docker :
       
 # Put all the hawkbit related infos here
 hawkbit :
-   ip-address : "http://11.11.111.111:8080"
+   url : "http://11.11.111.111:8080"
    target : "kuksa-dongle"
    user : "admin"
    password : "admin"
  
 # Put all appstore infos here  
 appstore :
-   ip-address : "localhost:8082"
+   url : "http://localhost:8082"
    category : "kuksa-test"
    auth : "Basic YWRtaW46YWRtaW4="

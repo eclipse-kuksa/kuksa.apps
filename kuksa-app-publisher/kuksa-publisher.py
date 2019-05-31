@@ -22,7 +22,7 @@ def getAppIDinHawkbit(config):
     http = Session()
     http.auth = (config['hawkbit']['user'], config['hawkbit']['password'])
     app_response = http.get(
-        url='{}/rest/v1/softwaremodules?q=name%3D%3D{}%3Bversion%3D%3D{}'.format(config['hawkbit']['ip-address'], config['docker']['name'], config['docker']['version'])
+        url='{}/rest/v1/softwaremodules?q=name%3D%3D{}%3Bversion%3D%3D{}'.format(config['hawkbit']['url'], config['docker']['name'], config['docker']['version'])
     )
     if __handle_error(app_response) != 0:
        exit(0)  
@@ -42,7 +42,7 @@ def getAppIDinHawkbit(config):
 
 def publish_app(config_file, upload_image=True):
     with open(config_file, mode='r') as __config_file:
-       y=yaml.load(__config_file)
+       y=yaml.safe_load(__config_file)
        config = json.dumps(y)
        config = json.loads(config)
     app_image_file = None
@@ -75,7 +75,7 @@ def publish_app(config_file, upload_image=True):
     # upload the config artifact to Hawkbit directly
 
     config_response = http.post(
-        url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['ip-address'], app_id),
+        url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['url'], app_id),
         data={
             'filename': 'docker-container.json',
         },
@@ -90,7 +90,7 @@ def publish_app(config_file, upload_image=True):
 
     if app_image_file:
         image_response = http.post(
-            url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['ip-address'], app_id),
+            url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['url'], app_id),
             data={
                 'filename': 'docker-image.tar',
             },
@@ -131,7 +131,7 @@ def createNewAppCategory(config ) :
    data = '{\"name\" : "" }'
    data = json.loads(data)
    data['name'] = config['appstore']['category']
-   response = requests.post('http://{}/api/1.0/appcategory'.format(config['appstore']['ip-address']), headers=headers, data=json.dumps(data))
+   response = requests.post('{}/api/1.0/appcategory'.format(config['appstore']['url']), headers=headers, data=json.dumps(data))
    if __handle_error(response) != 0:
       print("Okay! There is already the app category in the appstore but i am not able to get its ID :(, therefore I set appCategoryID = 1. ")
       return 1  #TODO fix this, check with appstore developers.
@@ -146,7 +146,7 @@ def createNewAppCategory(config ) :
 # Creates new app in appstore
 def createAppinAppstore(config_file) :
     with open(config_file, mode='r') as __config_file:
-       y=yaml.load(__config_file)
+       y=yaml.safe_load(__config_file)
        config = json.dumps(y)
        config = json.loads(config)
        
@@ -167,7 +167,7 @@ def createAppinAppstore(config_file) :
     data['owner'] = config['docker']['owner']
     data['publishdate'] = datetime.utcnow().isoformat()
     data['appcategory']['id'] = catID
-    response = requests.post('http://{}/api/1.0/app'.format(config['appstore']['ip-address']), headers=headers, data=json.dumps(data))
+    response = requests.post('{}/api/1.0/app'.format(config['appstore']['url']), headers=headers, data=json.dumps(data))
     if __handle_error(response) != 0:
        print("App already exists in the appstore. Therefore no new app created.")
        return
@@ -179,7 +179,7 @@ def deleteArtifact(config, appID, artiID) :
    http = Session()
    http.auth = (config['hawkbit']['user'], config['hawkbit']['password'])
    app_response = http.delete(
-        url='{}/rest/v1/softwaremodules/{}/artifacts/{}'.format(config['hawkbit']['ip-address'], appID, artiID),
+        url='{}/rest/v1/softwaremodules/{}/artifacts/{}'.format(config['hawkbit']['url'], appID, artiID),
     )
    if __handle_error(app_response) != 0:
       exit(0)
@@ -188,7 +188,7 @@ def deleteArtifact(config, appID, artiID) :
 # Creates new app in appstore
 def deleteExistingArtifacts(config_file) :
     with open(config_file, mode='r') as __config_file:
-       y=yaml.load(__config_file)
+       y=yaml.safe_load(__config_file)
        config = json.dumps(y)
        config = json.loads(config)
     
@@ -199,7 +199,7 @@ def deleteExistingArtifacts(config_file) :
     
     #get artifacts
     app_response = http.get(
-        url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['ip-address'], appID),
+        url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['url'], appID),
     )
     if __handle_error(app_response) != 0:
        exit(0)
