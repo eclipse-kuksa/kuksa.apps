@@ -48,7 +48,7 @@ def publish_app(config_file, upload_image=True):
     app_image_file = None
     
     if upload_image:
-        app_image_file = '{}-{}.tar'.format(config['docker']['name'], config['docker']['version'])
+        app_image_file = '{}-{}.tar.bz2'.format(config['docker']['name'], config['docker']['version'])
 
         app_image = config['docker']['image']
         app_image_new = '{}__{}-{}'.format(app_image, config['docker']['name'], config['docker']['version'])
@@ -58,7 +58,7 @@ def publish_app(config_file, upload_image=True):
             print("Failed to re-tag the app image")
             exit(1)
 
-        success = subprocess.run('docker save {} > {}'.format(app_image_new, app_image_file), shell=True).returncode
+        success = subprocess.run('docker save {} | bzip2 -9 > {}'.format(app_image_new, app_image_file), shell=True).returncode
         if success != 0:
             print("Failed to save the docker image")
             exit(1)
@@ -92,7 +92,7 @@ def publish_app(config_file, upload_image=True):
         image_response = http.post(
             url='{}/rest/v1/softwaremodules/{}/artifacts'.format(config['hawkbit']['url'], app_id),
             data={
-                'filename': 'docker-image.tar',
+                'filename': 'docker-image.tar.bz2',
             },
             files={
                 'file': open(app_image_file, mode='rb')
