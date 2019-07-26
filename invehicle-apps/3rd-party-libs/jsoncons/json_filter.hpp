@@ -10,7 +10,6 @@
 #include <string>
 
 #include <jsoncons/json_content_handler.hpp>
-#include <jsoncons/parse_error_handler.hpp>
 
 namespace jsoncons {
 
@@ -18,124 +17,134 @@ template <class CharT>
 class basic_json_filter : public basic_json_content_handler<CharT>
 {
 public:
-    using typename basic_json_content_handler<CharT>::string_view_type                                 ;
+    using typename basic_json_content_handler<CharT>::string_view_type;
 private:
-    basic_json_content_handler<CharT>& content_handler_;
-    basic_json_content_handler<CharT>& downstream_handler_;
+    basic_json_content_handler<CharT>& to_handler_;
 
     // noncopyable and nonmoveable
     basic_json_filter<CharT>(const basic_json_filter<CharT>&) = delete;
     basic_json_filter<CharT>& operator=(const basic_json_filter<CharT>&) = delete;
 public:
     basic_json_filter(basic_json_content_handler<CharT>& handler)
-        : content_handler_(*this),
-          downstream_handler_(handler)
+        : to_handler_(handler)
     {
+    }
+
+    basic_json_content_handler<CharT>& to_handler()
+    {
+        return to_handler_;
     }
 
 #if !defined(JSONCONS_NO_DEPRECATED)
+    JSONCONS_DEPRECATED("Instead, use to_handler") 
     basic_json_content_handler<CharT>& input_handler()
     {
-        return downstream_handler_;
+        return to_handler_;
+    }
+
+    JSONCONS_DEPRECATED("Instead, use to_handler") 
+    basic_json_content_handler<CharT>& downstream_handler()
+    {
+        return to_handler_;
+    }
+
+    JSONCONS_DEPRECATED("Instead, use to_handler") 
+    basic_json_content_handler<CharT>& destination_handler()
+    {
+        return to_handler_;
     }
 #endif
 
-    basic_json_content_handler<CharT>& downstream_handler()
-    {
-        return downstream_handler_;
-    }
-
 private:
-    void do_begin_json() override
+    void do_flush() override
     {
-        downstream_handler_.begin_json();
+        to_handler_.flush();
     }
 
-    void do_end_json() override
+    bool do_begin_object(semantic_tag tag, const ser_context& context) override
     {
-        downstream_handler_.end_json();
+        return to_handler_.begin_object(tag, context);
     }
 
-    void do_begin_object(const serializing_context& context) override
+    bool do_begin_object(size_t length, semantic_tag tag, const ser_context& context) override
     {
-        downstream_handler_.begin_object(context);
+        return to_handler_.begin_object(length, tag, context);
     }
 
-    void do_begin_object(size_t length, const serializing_context& context) override
+    bool do_end_object(const ser_context& context) override
     {
-        downstream_handler_.begin_object(length, context);
+        return to_handler_.end_object(context);
     }
 
-    void do_end_object(const serializing_context& context) override
+    bool do_begin_array(semantic_tag tag, const ser_context& context) override
     {
-        downstream_handler_.end_object(context);
+        return to_handler_.begin_array(tag, context);
     }
 
-    void do_begin_array(const serializing_context& context) override
+    bool do_begin_array(size_t length, semantic_tag tag, const ser_context& context) override
     {
-        downstream_handler_.begin_array(context);
+        return to_handler_.begin_array(length, tag, context);
     }
 
-    void do_begin_array(size_t length, const serializing_context& context) override
+    bool do_end_array(const ser_context& context) override
     {
-        downstream_handler_.begin_array(length, context);
+        return to_handler_.end_array(context);
     }
 
-    void do_end_array(const serializing_context& context) override
+    bool do_name(const string_view_type& name,
+                 const ser_context& context) override
     {
-        downstream_handler_.end_array(context);
+        return to_handler_.name(name, context);
     }
 
-    void do_name(const string_view_type& name,
-                 const serializing_context& context) override
+    bool do_string_value(const string_view_type& value,
+                         semantic_tag tag,
+                         const ser_context& context) override
     {
-        downstream_handler_.name(name,context);
+        return to_handler_.string_value(value, tag, context);
     }
 
-    void do_string_value(const string_view_type& value,
-                         const serializing_context& context) override
+    bool do_byte_string_value(const byte_string_view& b, 
+                              semantic_tag tag,
+                              const ser_context& context) override
     {
-        downstream_handler_.string_value(value,context);
+        return to_handler_.byte_string_value(b, tag, context);
     }
 
-    void do_byte_string_value(const uint8_t* data, size_t length,
-                              const serializing_context& context) override
+    bool do_double_value(double value, 
+                         semantic_tag tag,
+                         const ser_context& context) override
     {
-        downstream_handler_.byte_string_value(data, length, context);
+        return to_handler_.double_value(value, tag, context);
     }
 
-    void do_double_value(double value, const number_format& fmt,
-                         const serializing_context& context) override
+    bool do_int64_value(int64_t value,
+                        semantic_tag tag,
+                        const ser_context& context) override
     {
-        downstream_handler_.double_value(value, fmt, context);
+        return to_handler_.int64_value(value, tag, context);
     }
 
-    void do_integer_value(int64_t value,
-                          const serializing_context& context) override
+    bool do_uint64_value(uint64_t value,
+                         semantic_tag tag,
+                         const ser_context& context) override
     {
-        downstream_handler_.integer_value(value,context);
+        return to_handler_.uint64_value(value, tag, context);
     }
 
-    void do_uinteger_value(uint64_t value,
-                           const serializing_context& context) override
+    bool do_bool_value(bool value, semantic_tag tag, const ser_context& context) override
     {
-        downstream_handler_.uinteger_value(value,context);
+        return to_handler_.bool_value(value, tag, context);
     }
 
-    void do_bool_value(bool value,
-                       const serializing_context& context) override
+    bool do_null_value(semantic_tag tag, const ser_context& context) override
     {
-        downstream_handler_.bool_value(value,context);
-    }
-
-    void do_null_value(const serializing_context& context) override
-    {
-        downstream_handler_.null_value(context);
+        return to_handler_.null_value(tag, context);
     }
 
 };
 
-// Filters out begin_json and end_json events
+// Filters out begin_document and end_document events
 template <class CharT>
 class basic_json_fragment_filter : public basic_json_filter<CharT>
 {
@@ -147,11 +156,7 @@ public:
     {
     }
 private:
-    void do_begin_json() override
-    {
-    }
-
-    void do_end_json() override
+    void do_flush() override
     {
     }
 };
@@ -175,19 +180,194 @@ public:
     }
 
 private:
-    void do_name(const string_view_type& name,
-                 const serializing_context& context) override
+    bool do_name(const string_view_type& name,
+                 const ser_context& context) override
     {
         if (name == name_)
         {
-            this->downstream_handler().name(new_name_,context);
+            return this->to_handler().name(new_name_,context);
         }
         else
         {
-            this->downstream_handler().name(name,context);
+            return this->to_handler().name(name,context);
         }
     }
 };
+
+template <class From,class To,class Enable=void>
+class json_content_handler_adaptor : public From
+{
+public:
+    using typename From::string_view_type;
+private:
+    To* to_handler_;
+
+    // noncopyable
+    json_content_handler_adaptor(const json_content_handler_adaptor&) = delete;
+    json_content_handler_adaptor& operator=(const json_content_handler_adaptor&) = delete;
+public:
+
+    json_content_handler_adaptor()
+        : to_handler_(nullptr)
+    {
+    }
+    json_content_handler_adaptor(To& handler)
+        : to_handler_(std::addressof(handler))
+    {
+    }
+
+    // moveable
+    json_content_handler_adaptor(json_content_handler_adaptor&&) = default;
+    json_content_handler_adaptor& operator=(json_content_handler_adaptor&&) = default;
+
+    To& to_handler()
+    {
+        return *to_handler_;
+    }
+
+private:
+    void do_flush() override
+    {
+        to_handler_->flush();
+    }
+
+    bool do_begin_object(semantic_tag tag, 
+                         const ser_context& context) override
+    {
+        return to_handler_->begin_object(tag, context);
+    }
+
+    bool do_begin_object(size_t length, 
+                         semantic_tag tag, 
+                         const ser_context& context) override
+    {
+        return to_handler_->begin_object(length, tag, context);
+    }
+
+    bool do_end_object(const ser_context& context) override
+    {
+        return to_handler_->end_object(context);
+    }
+
+    bool do_begin_array(semantic_tag tag, 
+                        const ser_context& context) override
+    {
+        return to_handler_->begin_array(tag, context);
+    }
+
+    bool do_begin_array(size_t length, 
+                        semantic_tag tag, 
+                        const ser_context& context) override
+    {
+        return to_handler_->begin_array(length, tag, context);
+    }
+
+    bool do_end_array(const ser_context& context) override
+    {
+        return to_handler_->end_array(context);
+    }
+
+    bool do_name(const string_view_type& name,
+                 const ser_context& context) override
+    {
+        std::basic_string<typename To::char_type> target;
+        auto result = unicons::convert(name.begin(),name.end(),std::back_inserter(target),unicons::conv_flags::strict);
+        if (result.ec != unicons::conv_errc())
+        {
+            throw ser_error(result.ec);
+        }
+        return to_handler().name(target, context);
+    }
+
+    bool do_string_value(const string_view_type& value,
+                         semantic_tag tag,
+                         const ser_context& context) override
+    {
+        std::basic_string<typename To::char_type> target;
+        auto result = unicons::convert(value.begin(),value.end(),std::back_inserter(target),unicons::conv_flags::strict);
+        if (result.ec != unicons::conv_errc())
+        {
+            throw ser_error(result.ec);
+        }
+        return to_handler().string_value(target, tag, context);
+    }
+
+    bool do_byte_string_value(const byte_string_view& b, 
+                              semantic_tag tag,
+                              const ser_context& context) override
+    {
+        return to_handler_->byte_string_value(b, tag, context);
+    }
+
+    bool do_double_value(double value, 
+                         semantic_tag tag,
+                         const ser_context& context) override
+    {
+        return to_handler_->double_value(value, tag, context);
+    }
+
+    bool do_int64_value(int64_t value,
+                        semantic_tag tag,
+                        const ser_context& context) override
+    {
+        return to_handler_->int64_value(value, tag, context);
+    }
+
+    bool do_uint64_value(uint64_t value,
+                         semantic_tag tag,
+                         const ser_context& context) override
+    {
+        return to_handler_->uint64_value(value, tag, context);
+    }
+
+    bool do_bool_value(bool value, semantic_tag tag, const ser_context& context) override
+    {
+        return to_handler_->bool_value(value, tag, context);
+    }
+
+    bool do_null_value(semantic_tag tag, const ser_context& context) override
+    {
+        return to_handler_->null_value(tag, context);
+    }
+
+};
+
+template <class From,class To>
+class json_content_handler_adaptor<From,To,typename std::enable_if<std::is_convertible<To*,From*>::value>::type>
+{
+public:
+    typedef typename From::char_type char_type;
+    typedef typename From::char_traits_type char_traits_type;
+    typedef typename From::string_view_type string_view_type;
+private:
+    To* to_handler_;
+public:
+    json_content_handler_adaptor()
+        : to_handler_(nullptr)
+    {
+    }
+    json_content_handler_adaptor(To& handler)
+        : to_handler_(std::addressof(handler))
+    {
+    }
+
+    operator From&() { return *to_handler_; }
+
+    // moveable
+    json_content_handler_adaptor(json_content_handler_adaptor&&) = default;
+    json_content_handler_adaptor& operator=(json_content_handler_adaptor&&) = default;
+
+    To& to_handler()
+    {
+        return *to_handler_;
+    }
+};
+
+template <class From,class To>
+json_content_handler_adaptor<From,To> make_json_content_handler_adaptor(To& to)
+{
+    return json_content_handler_adaptor<From, To>(to);
+}
 
 typedef basic_json_filter<char> json_filter;
 typedef basic_json_filter<wchar_t> wjson_filter;
