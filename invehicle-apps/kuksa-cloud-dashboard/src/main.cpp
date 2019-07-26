@@ -11,15 +11,17 @@
  *      Robert Bosch GmbH - initial API and functionality
  * *****************************************************************************
  */
+ 
+#include <json.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
 #include <iostream>
+#include <fstream>
 #include <unistd.h>
 #include "client_wss.hpp"
 #include "honoMqtt.hpp"
 #include "emailHTTP.hpp"
-#include <json.hpp>
 
 // delay between sending each signals in microseconds
 #define SENDDELAY 50000
