@@ -11,6 +11,8 @@
  *      Robert Bosch GmbH - initial API and functionality
  * *****************************************************************************
  */
+ 
+#include <json.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
@@ -18,7 +20,6 @@
 #include <unistd.h>
 #include "client_wss.hpp"
 #include "honoMqtt.hpp"
-#include <json.hpp>
 
 
 using namespace std;
