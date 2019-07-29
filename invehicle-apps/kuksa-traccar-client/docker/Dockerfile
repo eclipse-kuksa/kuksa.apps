@@ -1,4 +1,4 @@
-FROM arm64v8/python:3.6-alpine AS build-env
+FROM arm64v8/python:3.7-alpine AS build-env
 
 COPY kuksa-traccar-client/docker/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
@@ -13,7 +13,7 @@ RUN rm /usr/bin/qemu-aarch64-static
 WORKDIR /app
 
 
-FROM arm64v8/python:3.6-alpine
+FROM arm64v8/python:3.7-alpine
 COPY --from=build-env /app /app
 ENV PYTHONPATH=/usr/local/lib/python3.5/site-packages
 ENV PYTHONUNBUFFERED=yes
