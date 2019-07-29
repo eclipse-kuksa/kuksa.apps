@@ -17,16 +17,20 @@ import sys
 import threading
 lock=threading.Lock()
 
+RUNNING=True
+
 
 position = { "valid":False, "lat":"0", "lon":"0", "alt":"0", "hdop":"0", "speed":"0" }
 
 def loop(gpsd_socket):
-    global position,lock
+    global position,lock, RUNNING
     print("gpsd receive loop started")
     data_stream = gps3.DataStream()
     gpsd_socket.watch()
     for new_data in gpsd_socket:
         if new_data:
+            if RUNNING == False:
+                return
             data_stream.unpack(new_data)
             print("GPSD data....")
 
@@ -62,6 +66,13 @@ def connect(host,port):
     t = threading.Thread(target=loop, args=(gpsd_socket,))
     t.start()
     
+
+
+def shutdown():
+	global RUNNING
+	RUNNING=False
+
+
 def initProvider(config):
     print("Init gpsd provider...")
     if "Provider.gpsd" not in config:

@@ -24,9 +24,18 @@ from providers import *
 from os import path
 from datetime import datetime
 import requests
+import signal
 
 config_candidates=['traccar-client.ini', '/etc/traccar-client.ini']
 
+
+RUNNING=True
+
+def terminationSignalreceived(signalNumber, frame):
+	global RUNNING
+	print("Received termination signal. Shutting down")
+	RUNNING=False
+	PROVIDER.shutdown()
 
 
 def instantiateProvider(provider, config):
@@ -36,6 +45,7 @@ def instantiateProvider(provider, config):
     
 
 def main(args):
+    global RUNNING, PROVIDER
     config = configparser.ConfigParser()
 
     configfile=None
@@ -76,13 +86,13 @@ def main(args):
     print("Location data will be provided by "+str(location_provider))
 
     print("Trying to instantiate "+str(location_provider)+" provider")
-    provider=instantiateProvider(location_provider,config)
+    PROVIDER=instantiateProvider(location_provider,config)
 
-    while True:
-        pos=provider.getPosition()
+    while RUNNING==True:
+        pos=PROVIDER.getPosition()
         print("Current pos "+str(pos))
         if pos['valid']:
-            request="id={}&lat={}&lon={}&timestamp={}&hdop={}&altitude={}&speed={}".format(traccar_identifier,pos['lat'],pos['lon'],datetime.now().isoformat(),pos['hdop'],pos['alt'],pos['speed'])
+            request="id={}&lat={}&lon={}&timestamp={}&hdop={}&altitude={}&speed={}".format(traccar_identifier,pos['lat'],pos['lon'],datetime.now(),pos['hdop'],pos['alt'],pos['speed'])
 
             url=traccar_server+"/?"+request
             print("Will GET "+str(url))
@@ -103,4 +113,7 @@ def main(args):
 
 
 if __name__ == "__main__":
+    signal.signal(signal.SIGINT, terminationSignalreceived)
+    signal.signal(signal.SIGQUIT, terminationSignalreceived)
+    signal.signal(signal.SIGTERM, terminationSignalreceived)
     main(sys.argv)
