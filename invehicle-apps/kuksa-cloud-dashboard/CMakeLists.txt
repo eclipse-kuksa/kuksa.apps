@@ -18,8 +18,7 @@ project(dashboard)
 
 message(STATUS ${CMAKE_CURRENT_SOURCE_DIR})
 
-add_compile_options(-std=c++11 )
-
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_executable(${PROJECT_NAME}  "src/main.cpp" "src/honoMqtt.cpp" "src/emailHTTP.cpp" )
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-party-libs ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-party-libs/Simple-WebSocket-Server ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-party-libs/jsoncons ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-party-libs/paho.mqtt.c/src ${CMAKE_CURRENT_SOURCE_DIR}/../3rd-party-libs/paho.mqtt.cpp/src)

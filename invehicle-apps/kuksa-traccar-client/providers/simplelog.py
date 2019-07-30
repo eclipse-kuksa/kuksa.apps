@@ -25,11 +25,16 @@ position = { "valid":False, "lat":"0", "lon":"0", "alt":"0", "hdop":"0", "speed"
 
 simplelog_interval=1
 lock=threading.Lock()
+RUNNING=True
 
 def loop(csv_reader):
-    global simplelog_interval,lock
+    global RUNNING,simplelog_interval,lock
     for line in csv_reader:
         time.sleep(simplelog_interval)
+
+        if RUNNING == False:
+            return
+
         if not len(line) == 2:
             print("Simplelog skipping invalid line "+str(line))
             continue
@@ -70,7 +75,11 @@ def initProvider(config):
     #loop(csv_reader)
     t = threading.Thread(target=loop, args=(csv_reader,))
     t.start()
+    return t
 
+def shutdown():
+	global RUNNING
+	RUNNING=False
 
 
 def getPosition():
