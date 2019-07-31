@@ -1,3 +1,10 @@
+# Copyright Robert Bosch GmbH, 2019. Part of the Eclipse Kuksa Project.
+#
+# All rights reserved. This configuration file is provided to you under the
+# terms and conditions of the Eclipse Distribution License v1.0 which
+# accompanies this distribution, and is available at
+# http://www.eclipse.org/org/documents/edl-v10.php
+
 FROM arm64v8/python:3.7-alpine AS build-env
 
 COPY kuksa-traccar-client/docker/qemu-aarch64-static /usr/bin/qemu-aarch64-static
