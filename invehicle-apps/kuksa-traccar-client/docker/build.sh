@@ -58,7 +58,7 @@ function build {
 
     # build image
     cd ../../
-    docker build --platform linux/$ARCH -f ./kuksa-traccar-client/docker/Dockerfile.build -t ${ARCH}/${NAME}:${VERSION} .
+    docker build --squash --platform linux/$ARCH -f ./kuksa-traccar-client/docker/Dockerfile.build -t ${ARCH}/${NAME}:${VERSION} .
     cd kuksa-traccar-client/docker
 
     # cleanup
