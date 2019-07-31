@@ -49,6 +49,16 @@ docker run amd64/kuksa-traccar:0.1.0
 
 For configuration refer to the main readme. Please note that currently the traccar demo is configured using a config file, so you need to configure it according to your setup before packaging the docker.
 
+## Can't restart container on ARM64
+it has been observed, that on certain ARM64 systems all application code (all .py files and packages) vanish. The result is, that the container can only be started once. if it is ever stopped,
+it won't run again, because the application is missing. The root cause is unclear, however it does not happen in a single stage build. If you suffer from this error use the Dockerfile.singlestate
+
+```
+mv Dockerfile Dockerfile.multi
+mv Dockerfile.singlestage Dockerfile
+```
+
+and build as described above.
 
 
 
