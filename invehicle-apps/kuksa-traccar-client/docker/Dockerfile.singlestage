@@ -5,7 +5,7 @@
 # accompanies this distribution, and is available at
 # http://www.eclipse.org/org/documents/edl-v10.php
 
-FROM arm64v8/python:3.7-alpine AS build-env
+FROM arm64v8/python:3.7-alpine
 
 COPY kuksa-traccar-client/docker/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
@@ -13,10 +13,12 @@ COPY kuksa-traccar-client/docker/qemu-aarch64-static /usr/bin/qemu-aarch64-stati
 ADD ./kuksa-traccar-client/ /app
 WORKDIR /app
 RUN pip install --target=./ --no-cache-dir -r requirements.txt
+RUN rm ./requirements.txt
+#Delete any .pyc files
+RUN find . -name '*.pyc' -delete
 
+RUN rm /usr/bin/qemu-aarch64-static
 
-FROM arm64v8/python:3.7-alpine
-COPY --from=build-env /app /app
 
 ENV PYTHONUNBUFFERED=yes
 WORKDIR /app

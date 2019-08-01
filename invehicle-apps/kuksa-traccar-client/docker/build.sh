@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+########################################################################
+# Copyright (c) 2018-2019 Robert Bosch GmbH
+#
+# This program and the accompanying materials are made
+# available under the terms of the Eclipse Public License 2.0
+# which is available at https://www.eclipse.org/legal/epl-2.0/
+#
+# SPDX-License-Identifier: EPL-2.0
+########################################################################
+
 VERSION="0.1.0"
 NAME="kuksa-traccar"
 
@@ -58,7 +68,7 @@ function build {
 
     # build image
     cd ../../
-    docker build --platform linux/$ARCH -f ./kuksa-traccar-client/docker/Dockerfile.build -t ${ARCH}/${NAME}:${VERSION} .
+    docker build --squash --platform linux/$ARCH -f ./kuksa-traccar-client/docker/Dockerfile.build -t ${ARCH}/${NAME}:${VERSION} .
     cd kuksa-traccar-client/docker
 
     # cleanup
