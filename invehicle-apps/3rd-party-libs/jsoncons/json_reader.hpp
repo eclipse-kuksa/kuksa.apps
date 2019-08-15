@@ -7,18 +7,16 @@
 #ifndef JSONCONS_JSON_READER_HPP
 #define JSONCONS_JSON_READER_HPP
 
-#include <memory>
+#include <memory> // std::allocator
 #include <string>
-#include <sstream>
 #include <vector>
-#include <istream>
-#include <cstdlib>
 #include <stdexcept>
 #include <system_error>
 #include <ios>
+#include <utility> // std::move
+#include <jsoncons/source.hpp>
 #include <jsoncons/json_exception.hpp>
 #include <jsoncons/json_content_handler.hpp>
-#include <jsoncons/parse_error_handler.hpp>
 #include <jsoncons/json_parser.hpp>
 
 namespace jsoncons {
@@ -33,7 +31,7 @@ public:
 private:
     basic_null_json_content_handler<CharT> default_content_handler_;
     basic_json_content_handler<CharT>& other_handler_;
-    //parse_error_handler& err_handler_;
+    //std::function<bool(json_errc,const ser_context&)> err_handler_;
 
     // noncopyable and nonmoveable
     json_utf8_other_content_handler_adapter<CharT>(const json_utf8_other_content_handler_adapter<CharT>&) = delete;
@@ -46,7 +44,7 @@ public:
     }
 
     json_utf8_other_content_handler_adapter(basic_json_content_handler<CharT>& other_handler/*,
-                                          parse_error_handler& err_handler*/)
+                                          std::function<bool(json_errc,const ser_context&)> err_handler*/)
         : other_handler_(other_handler)/*,
           err_handler_(err_handler)*/
     {
@@ -54,37 +52,32 @@ public:
 
 private:
 
-    void do_begin_json() override
+    void do_flush() override
     {
-        other_handler_.begin_json();
+        other_handler_.flush();
     }
 
-    void do_end_json() override
+    bool do_begin_object(semantic_tag tag, const ser_context& context) override
     {
-        other_handler_.end_json();
+        return other_handler_.begin_object(tag, context);
     }
 
-    void do_begin_object(const serializing_context& context) override
+    bool do_end_object(const ser_context& context) override
     {
-        other_handler_.begin_object(context);
+        return other_handler_.end_object(context);
     }
 
-    void do_end_object(const serializing_context& context) override
+    bool do_begin_array(semantic_tag tag, const ser_context& context) override
     {
-        other_handler_.end_object(context);
+        return other_handler_.begin_array(tag, context);
     }
 
-    void do_begin_array(const serializing_context& context) override
+    bool do_end_array(const ser_context& context) override
     {
-        other_handler_.begin_array(context);
+        return other_handler_.end_array(context);
     }
 
-    void do_end_array(const serializing_context& context) override
-    {
-        other_handler_.end_array(context);
-    }
-
-    void do_name(const string_view_type& name, const serializing_context& context) override
+    bool do_name(const string_view_type& name, const ser_context& context) override
     {
         std::basic_string<CharT> target;
         auto result = unicons::convert(
@@ -92,12 +85,12 @@ private:
             unicons::conv_flags::strict);
         if (result.ec != unicons::conv_errc())
         {
-            throw parse_error(result.ec,context.line_number(),context.column_number());
+            throw ser_error(result.ec,context.line(),context.column());
         }
-        other_handler_.name(target, context);
+        return other_handler_.name(target, context);
     }
 
-    void do_string_value(const string_view_type& value, const serializing_context& context) override
+    bool do_string_value(const string_view_type& value, semantic_tag tag, const ser_context& context) override
     {
         std::basic_string<CharT> target;
         auto result = unicons::convert(
@@ -105,51 +98,66 @@ private:
             unicons::conv_flags::strict);
         if (result.ec != unicons::conv_errc())
         {
-            throw parse_error(result.ec,context.line_number(),context.column_number());
+            throw ser_error(result.ec,context.line(),context.column());
         }
-        other_handler_.string_value(target, context);
+        return other_handler_.string_value(target, tag, context);
     }
 
-    void do_integer_value(int64_t value, const serializing_context& context) override
+    bool do_int64_value(int64_t value, 
+                        semantic_tag tag, 
+                        const ser_context& context) override
     {
-        other_handler_.integer_value(value, context);
+        return other_handler_.int64_value(value, tag, context);
     }
 
-    void do_uinteger_value(uint64_t value, const serializing_context& context) override
+    bool do_uint64_value(uint64_t value, 
+                         semantic_tag tag, 
+                         const ser_context& context) override
     {
-        other_handler_.uinteger_value(value, context);
+        return other_handler_.uint64_value(value, tag, context);
     }
 
-    void do_double_value(double value, const number_format& fmt, const serializing_context& context) override
+    bool do_double_value(double value, 
+                         semantic_tag tag,
+                         const ser_context& context) override
     {
-        other_handler_.double_value(value, fmt, context);
+        return other_handler_.double_value(value, tag, context);
     }
 
-    void do_bool_value(bool value, const serializing_context& context) override
+    bool do_bool_value(bool value, semantic_tag tag, const ser_context& context) override
     {
-        other_handler_.bool_value(value, context);
+        return other_handler_.bool_value(value, tag, context);
     }
 
-    void do_null_value(const serializing_context& context) override
+    bool do_null_value(semantic_tag tag, const ser_context& context) override
     {
-        other_handler_.null_value(context);
+        return other_handler_.null_value(tag, context);
     }
 };
 
-template<class CharT,class Allocator=std::allocator<char>>
+template<class CharT,class Src=jsoncons::stream_source<CharT>,class Allocator=std::allocator<char>>
 class basic_json_reader 
 {
-    static const size_t default_max_buffer_length = 16384;
-
+public:
     typedef CharT char_type;
+    typedef Src source_type;
+    typedef basic_string_view<CharT> string_view_type;
     typedef Allocator allocator_type;
+private:
     typedef typename std::allocator_traits<allocator_type>:: template rebind_alloc<CharT> char_allocator_type;
 
+    static const size_t default_max_buffer_length = 16384;
+
+    basic_null_json_content_handler<CharT> default_content_handler_;
+
+    basic_json_content_handler<CharT>& handler_;
+
     basic_json_parser<CharT,Allocator> parser_;
-    std::basic_istream<CharT>& is_;
-    bool eof_;
+
+    source_type source_;
     std::vector<CharT,char_allocator_type> buffer_;
     size_t buffer_length_;
+    bool eof_;
     bool begin_;
 
     // Noncopyable and nonmoveable
@@ -157,97 +165,114 @@ class basic_json_reader
     basic_json_reader& operator=(const basic_json_reader&) = delete;
 
 public:
-
-    basic_json_reader(std::basic_istream<CharT>& is)
-        : parser_(),
-          is_(is),
-          eof_(false),
-          buffer_length_(default_max_buffer_length),
-          begin_(true)
+    template <class Source>
+    explicit basic_json_reader(Source&& source)
+        : basic_json_reader(std::forward<Source>(source),
+                            default_content_handler_,
+                            basic_json_options<CharT>::get_default_options(),
+                            default_json_parsing())
     {
-        buffer_.reserve(buffer_length_);
     }
 
-    basic_json_reader(std::basic_istream<CharT>& is,
-                      parse_error_handler& err_handler)
-       : parser_(err_handler),
-         is_(is),
-         eof_(false),
-         buffer_length_(default_max_buffer_length),
-         begin_(true)
+    template <class Source>
+    basic_json_reader(Source&& source, 
+                      const basic_json_decode_options<CharT>& options)
+        : basic_json_reader(std::forward<Source>(source),
+                            default_content_handler_,
+                            options,
+                            default_json_parsing())
     {
-        buffer_.reserve(buffer_length_);
     }
 
-    basic_json_reader(std::basic_istream<CharT>& is, 
+    template <class Source>
+    basic_json_reader(Source&& source,
+                      std::function<bool(json_errc,const ser_context&)> err_handler)
+        : basic_json_reader(std::forward<Source>(source),
+                            default_content_handler_,
+                            basic_json_options<CharT>::get_default_options(),
+                            err_handler)
+    {
+    }
+
+    template <class Source>
+    basic_json_reader(Source&& source, 
+                      const basic_json_decode_options<CharT>& options,
+                      std::function<bool(json_errc,const ser_context&)> err_handler)
+        : basic_json_reader(std::forward<Source>(source),
+                            default_content_handler_,
+                            options,
+                            err_handler)
+    {
+    }
+
+    template <class Source>
+    basic_json_reader(Source&& source, 
                       basic_json_content_handler<CharT>& handler)
-        : parser_(handler),
-          is_(is),
-          eof_(false),
-          buffer_length_(default_max_buffer_length),
-          begin_(true)
+        : basic_json_reader(std::forward<Source>(source),
+                            handler,
+                            basic_json_options<CharT>::get_default_options(),
+                            default_json_parsing())
     {
-        buffer_.reserve(buffer_length_);
     }
 
-    basic_json_reader(std::basic_istream<CharT>& is,
+    template <class Source>
+    basic_json_reader(Source&& source, 
                       basic_json_content_handler<CharT>& handler,
-                      parse_error_handler& err_handler)
-       : parser_(handler,err_handler),
-         is_(is),
-         eof_(false),
-         buffer_length_(default_max_buffer_length),
-         begin_(true)
+                      const basic_json_decode_options<CharT>& options)
+        : basic_json_reader(std::forward<Source>(source),
+                            handler,
+                            options,
+                            default_json_parsing())
     {
-        buffer_.reserve(buffer_length_);
     }
 
-    basic_json_reader(std::basic_istream<CharT>& is, 
-                      const basic_json_serializing_options<CharT>& options)
-        : parser_(options),
-          is_(is),
-          eof_(false),
-          buffer_length_(default_max_buffer_length),
-          begin_(true)
+    template <class Source>
+    basic_json_reader(Source&& source,
+                      basic_json_content_handler<CharT>& handler,
+                      std::function<bool(json_errc,const ser_context&)> err_handler)
+        : basic_json_reader(std::forward<Source>(source),
+                            handler,
+                            basic_json_options<CharT>::get_default_options(),
+                            err_handler)
     {
-        buffer_.reserve(buffer_length_);
     }
 
-    basic_json_reader(std::basic_istream<CharT>& is, 
-                      const basic_json_serializing_options<CharT>& options,
-                      parse_error_handler& err_handler)
-       : parser_(options,err_handler),
-         is_(is),
-         eof_(false),
-         buffer_length_(default_max_buffer_length),
-         begin_(true)
-    {
-        buffer_.reserve(buffer_length_);
-    }
-
-    basic_json_reader(std::basic_istream<CharT>& is, 
-                      const basic_json_serializing_options<CharT>& options, 
-                      basic_json_content_handler<CharT>& handler)
-        : parser_(handler,options),
-          is_(is),
-          eof_(false),
-          buffer_length_(default_max_buffer_length),
-          begin_(true)
-    {
-        buffer_.reserve(buffer_length_);
-    }
-
-    basic_json_reader(std::basic_istream<CharT>& is,
+    template <class Source>
+    basic_json_reader(Source&& source,
                       basic_json_content_handler<CharT>& handler, 
-                      const basic_json_serializing_options<CharT>& options,
-                      parse_error_handler& err_handler)
-       : parser_(handler,options,err_handler),
-         is_(is),
-         eof_(false),
+                      const basic_json_decode_options<CharT>& options,
+                      std::function<bool(json_errc,const ser_context&)> err_handler,
+                      typename std::enable_if<!std::is_constructible<basic_string_view<CharT>,Source>::value>::type* = 0)
+       : handler_(handler),
+         parser_(options,err_handler),
+         source_(std::forward<Source>(source)),
          buffer_length_(default_max_buffer_length),
+         eof_(false),
          begin_(true)
     {
         buffer_.reserve(buffer_length_);
+    }
+
+    template <class Source>
+    basic_json_reader(Source&& source,
+                      basic_json_content_handler<CharT>& handler, 
+                      const basic_json_decode_options<CharT>& options,
+                      std::function<bool(json_errc,const ser_context&)> err_handler,
+                      typename std::enable_if<std::is_constructible<basic_string_view<CharT>,Source>::value>::type* = 0)
+       : handler_(handler),
+         parser_(options,err_handler),
+         buffer_length_(0),
+         eof_(false),
+         begin_(false)
+    {
+        basic_string_view<CharT> sv(std::forward<Source>(source));
+        auto result = unicons::skip_bom(sv.begin(), sv.end());
+        if (result.ec != unicons::encoding_errc())
+        {
+            throw ser_error(result.ec,parser_.line(),parser_.column());
+        }
+        size_t offset = result.it - sv.begin();
+        parser_.update(sv.data()+offset,sv.size()-offset);
     }
 
     size_t buffer_length() const
@@ -261,11 +286,13 @@ public:
         buffer_.reserve(buffer_length_);
     }
 #if !defined(JSONCONS_NO_DEPRECATED)
+    JSONCONS_DEPRECATED("Instead, use max_nesting_depth() on options")
     size_t max_nesting_depth() const
     {
         return parser_.max_nesting_depth();
     }
 
+    JSONCONS_DEPRECATED("Instead, use max_nesting_depth(size_t) on options")
     void max_nesting_depth(size_t depth)
     {
         parser_.max_nesting_depth(depth);
@@ -277,70 +304,62 @@ public:
         read_next(ec);
         if (ec)
         {
-            throw parse_error(ec,parser_.line_number(),parser_.column_number());
-        }
-    }
-
-    void read_buffer(std::error_code& ec)
-    {
-        buffer_.clear();
-        buffer_.resize(buffer_length_);
-        is_.read(buffer_.data(), buffer_length_);
-        buffer_.resize(static_cast<size_t>(is_.gcount()));
-        if (buffer_.size() == 0)
-        {
-            eof_ = true;
-        }
-        else if (begin_)
-        {
-            auto result = unicons::skip_bom(buffer_.begin(), buffer_.end());
-            if (result.ec != unicons::encoding_errc())
-            {
-                ec = result.ec;
-                return;
-            }
-            size_t offset = result.it - buffer_.begin();
-            parser_.set_source(buffer_.data()+offset,buffer_.size()-offset);
-            begin_ = false;
-        }
-        else
-        {
-            parser_.set_source(buffer_.data(),buffer_.size());
+            throw ser_error(ec,parser_.line(),parser_.column());
         }
     }
 
     void read_next(std::error_code& ec)
     {
-        parser_.reset();
-        while (!eof_ && !parser_.done())
+        try
         {
-            if (parser_.source_exhausted())
+            if (source_.is_error())
             {
-                if (!is_.eof())
+                ec = json_errc::source_error;
+                return;
+            }        
+            parser_.reset();
+            while (!parser_.finished())
+            {
+                if (parser_.source_exhausted())
                 {
-                    if (is_.fail())
+                    if (!source_.eof())
                     {
-                        ec = json_parser_errc::source_error;
-                        return;
-                    }        
-                    read_buffer(ec);
-                    if (ec) return;
+                        read_buffer(ec);
+                        if (ec) return;
+                    }
+                    else
+                    {
+                        eof_ = true;
+                    }
+                }
+                parser_.parse_some(handler_, ec);
+                if (ec) return;
+            }
+            
+            while (!eof_)
+            {
+                parser_.skip_whitespace();
+                if (parser_.source_exhausted())
+                {
+                    if (!source_.eof())
+                    {
+                        read_buffer(ec);
+                        if (ec) return;
+                    }
+                    else
+                    {
+                        eof_ = true;
+                    }
                 }
                 else
                 {
-                    eof_ = true;
+                    break;
                 }
             }
-            if (!eof_)
-            {
-                parser_.parse_some(ec);
-                if (ec) return;
-            }
         }
-        if (eof_)
+        catch (const ser_error& e)
         {
-            parser_.end_parse(ec);
-            if (ec) return;
+            ec = e.code();
         }
     }
 
@@ -350,54 +369,61 @@ public:
         check_done(ec);
         if (ec)
         {
-            throw parse_error(ec,parser_.line_number(),parser_.column_number());
+            throw ser_error(ec,parser_.line(),parser_.column());
         }
     }
 
-    size_t line_number() const
+    size_t line() const
     {
-        return parser_.line_number();
+        return parser_.line();
     }
 
-    size_t column_number() const
+    size_t column() const
     {
-        return parser_.column_number();
+        return parser_.column();
     }
 
     void check_done(std::error_code& ec)
     {
-        if (eof_)
+        try
         {
-            parser_.check_done(ec);
-            if (ec) return;
-        }
-        else
-        {
-            while (!eof_)
+            if (source_.is_error())
             {
-                if (parser_.source_exhausted())
+                ec = json_errc::source_error;
+                return;
+            }   
+            if (eof_)
+            {
+                parser_.check_done(ec);
+                if (ec) return;
+            }
+            else
+            {
+                while (!eof_)
                 {
-                    if (!is_.eof())
+                    if (parser_.source_exhausted())
                     {
-                        if (is_.fail())
+                        if (!source_.eof())
                         {
-                            ec = json_parser_errc::source_error;
-                            return;
-                        }   
-                        read_buffer(ec);     
+                            read_buffer(ec);     
+                            if (ec) return;
+                        }
+                        else
+                        {
+                            eof_ = true;
+                        }
+                    }
+                    if (!eof_)
+                    {
+                        parser_.check_done(ec);
                         if (ec) return;
                     }
-                    else
-                    {
-                        eof_ = true;
-                    }
-                }
-                if (!eof_)
-                {
-                    parser_.check_done(ec);
-                    if (ec) return;
                 }
             }
+        }
+        catch (const ser_error& e)
+        {
+            ec = e.code();
         }
     }
 
@@ -423,21 +449,25 @@ public:
 
 #if !defined(JSONCONS_NO_DEPRECATED)
 
+    JSONCONS_DEPRECATED("Instead, use buffer_length()")
     size_t buffer_capacity() const
     {
         return buffer_length_;
     }
 
+    JSONCONS_DEPRECATED("Instead, use buffer_length(size_t)")
     void buffer_capacity(size_t length)
     {
         buffer_length_ = length;
         buffer_.reserve(buffer_length_);
     }
+    JSONCONS_DEPRECATED("Instead, use max_nesting_depth()")
     size_t max_depth() const
     {
         return parser_.max_nesting_depth();
     }
 
+    JSONCONS_DEPRECATED("Instead, use max_nesting_depth(size_t)")
     void max_depth(size_t depth)
     {
         parser_.max_nesting_depth(depth);
@@ -445,10 +475,43 @@ public:
 #endif
 
 private:
+
+    void read_buffer(std::error_code& ec)
+    {
+        buffer_.clear();
+        buffer_.resize(buffer_length_);
+        size_t count = source_.read(buffer_.data(), buffer_length_);
+        buffer_.resize(static_cast<size_t>(count));
+        if (buffer_.size() == 0)
+        {
+            eof_ = true;
+        }
+        else if (begin_)
+        {
+            auto result = unicons::skip_bom(buffer_.begin(), buffer_.end());
+            if (result.ec != unicons::encoding_errc())
+            {
+                ec = result.ec;
+                return;
+            }
+            size_t offset = result.it - buffer_.begin();
+            parser_.update(buffer_.data()+offset,buffer_.size()-offset);
+            begin_ = false;
+        }
+        else
+        {
+            parser_.update(buffer_.data(),buffer_.size());
+        }
+    }
 };
 
 typedef basic_json_reader<char> json_reader;
 typedef basic_json_reader<wchar_t> wjson_reader;
+
+#if !defined(JSONCONS_NO_DEPRECATED)
+JSONCONS_DEPRECATED("Instead, use json_reader") typedef json_reader json_string_reader;
+JSONCONS_DEPRECATED("Instead, use wjson_reader") typedef wjson_reader wjson_string_reader;
+#endif
 
 }
 

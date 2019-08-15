@@ -4,15 +4,16 @@
 
 // See https://github.com/danielaparker/jsoncons for latest version
 
-#ifndef JSONCONS_DETAIL_HEAPONLYSTRING_HPP
-#define JSONCONS_DETAIL_HEAPONLYSTRING_HPP
+#ifndef JSONCONS_DETAIL_HEAP_ONLY_STRING_HPP
+#define JSONCONS_DETAIL_HEAP_ONLY_STRING_HPP
 
 #include <stdexcept>
 #include <string>
-#include <cstdlib>
 #include <exception>
 #include <ostream>
-#include <jsoncons/jsoncons_config.hpp>
+#include <cstring> // std::memcpy
+#include <memory> // std::allocator
+#include <jsoncons/config/jsoncons_config.hpp>
 
 namespace jsoncons { namespace detail {
 
@@ -109,7 +110,7 @@ public:
         heap_only_string<CharT,Allocator> data;
         char_type c[1];
     };
-    typedef typename std::aligned_storage<sizeof(string_storage), JSONCONS_ALIGNOF(string_storage)>::type storage_type;
+    typedef typename std::aligned_storage<sizeof(string_storage), alignof(string_storage)>::type storage_type;
 
     static size_t aligned_size(size_t n)
     {
@@ -132,7 +133,7 @@ public:
         auto psa = reinterpret_cast<string_storage*>(storage); 
 
         CharT* p = new(&psa->c)char_type[length + 1];
-        memcpy(p, s, length*sizeof(char_type));
+        std::memcpy(p, s, length*sizeof(char_type));
         p[length] = 0;
         ps->p_ = std::pointer_traits<pointer>::pointer_to(*p);
         ps->length_ = length;

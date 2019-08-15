@@ -4,15 +4,10 @@
 
 // See https://github.com/danielaparker/jsoncons for latest version
 
-#ifndef JSONCONS_JSONFWD_HPP
-#define JSONCONS_JSONFWD_HPP
+#ifndef JSONCONS_JSON_FWD_HPP
+#define JSONCONS_JSON_FWD_HPP
 
-#include <memory>
-
-#if defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wswitch"
-#endif
+#include <memory> // std::allocator
 
 namespace jsoncons {
 
@@ -24,9 +19,5 @@ template <class CharT,
 class basic_json;
 
 }
-
-#if defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
 
 #endif

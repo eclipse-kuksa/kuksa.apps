@@ -4,31 +4,19 @@
 
 // See https://github.com/danielaparker/jsoncons for latest version
 
-#ifndef JSONCONS_DETAIL_TYPETRAITSHELPER_HPP
-#define JSONCONS_DETAIL_TYPETRAITSHELPER_HPP
+#ifndef JSONCONS_DETAIL_TYPE_TRAITS_HPP
+#define JSONCONS_DETAIL_TYPE_TRAITS_HPP
 
 #include <stdexcept>
 #include <string>
-#include <sstream>
-#include <vector>
-#include <istream>
-#include <ostream>
-#include <iomanip>
-#include <cstdlib>
 #include <cmath>
-#include <cstdarg>
-#include <locale>
-#include <limits> 
-#include <type_traits>
-#include <algorithm>
+#include <type_traits> // std::enable_if, std::true_type
 #include <memory>
-#include <iterator>
+#include <iterator> // std::iterator_traits
 #include <exception>
 #include <array>
-#include <initializer_list>
-#include <jsoncons/jsoncons_config.hpp>
+#include <jsoncons/config/jsoncons_config.hpp>
 #include <jsoncons/json_exception.hpp>
-#include <jsoncons/detail/obufferedstream.hpp>
 
 namespace jsoncons
 {
@@ -93,20 +81,12 @@ struct type_wrapper<const T&>
     typedef const T& const_reference;
 };
 
-// json_literals
-
-namespace detail {
-JSONCONS_DEFINE_LITERAL(null_literal,"null")
-JSONCONS_DEFINE_LITERAL(true_literal,"true")
-JSONCONS_DEFINE_LITERAL(false_literal,"false")
-}
-
 inline
-unsigned char to_hex_character(unsigned char c)
+char to_hex_character(uint8_t c)
 {
     JSONCONS_ASSERT(c <= 0xF);
 
-    return (c < 10) ? ('0' + c) : ('A' - 10 + c);
+    return (char)((c < 10) ? ('0' + c) : ('A' - 10 + c));
 }
 
 inline
@@ -147,6 +127,17 @@ T * to_plain_pointer(T * ptr)
     return (ptr);
 }  
 
+// has_char_traits_member_type
+
+template <class T, class Enable=void>
+struct has_char_traits_member_type : std::false_type {};
+
+template <class T>
+struct has_char_traits_member_type<T, 
+                                   typename std::enable_if<std::is_same<typename T::traits_type::char_type, typename T::value_type>::value
+>::type> : std::true_type {};
+
+
 // is_string_like
 
 template <class T, class Enable=void>
@@ -154,7 +145,17 @@ struct is_string_like : std::false_type {};
 
 template <class T>
 struct is_string_like<T, 
-                      typename std::enable_if<!std::is_void<typename T::traits_type>::value
+                      typename std::enable_if<has_char_traits_member_type<T>::value && !std::is_void<decltype(T::npos)>::value && !std::is_void<typename T::allocator_type>::value
+>::type> : std::true_type {};
+
+// is_string_view_like
+
+template <class T, class Enable=void>
+struct is_string_view_like : std::false_type {};
+
+template <class T>
+struct is_string_view_like<T, 
+                      typename std::enable_if<has_char_traits_member_type<T>::value && !std::is_void<decltype(T::npos)>::value && !is_string_like<T>::value
 >::type> : std::true_type {};
 
 // is_integer_like
@@ -213,8 +214,9 @@ struct is_vector_like : std::false_type {};
 template <class T>
 struct is_vector_like<T, 
                       typename std::enable_if<!std::is_void<typename T::value_type>::value &&
+                                              !std::is_void<typename std::iterator_traits<typename T::iterator>::value_type>::value &&
                                               !is_array_like<T>::value && 
-                                              !is_string_like<T>::value && 
+                                              !has_char_traits_member_type<T>::value && 
                                               !is_map_like<T>::value 
 >::type> 
     : std::true_type {};

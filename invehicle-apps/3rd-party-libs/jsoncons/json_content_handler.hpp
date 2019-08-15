@@ -9,368 +9,483 @@
 
 #include <string>
 #include <jsoncons/json_exception.hpp>
-#include <jsoncons/jsoncons_utilities.hpp>
-#include <jsoncons/serializing_context.hpp>
-#if !defined(JSONCONS_NO_DEPRECATED)
-#include <jsoncons/json_type_traits.hpp> // for null_type
-#endif
+#include <jsoncons/bignum.hpp>
+#include <jsoncons/ser_context.hpp>
+#include <jsoncons/json_options.hpp>
 
 namespace jsoncons {
+
+// null_type
+
+struct null_type
+{
+};
+
+enum class semantic_tag : uint8_t 
+{
+    none = 0,
+    undefined = 0x01,
+    datetime = 0x02,
+    timestamp = 0x03,
+    bigint = 0x04,
+    bigdec = 0x05,
+    bigfloat = 0x06,
+    base16 = 0x07,
+    base64 = 0x08,
+    base64url = 0x09,
+    uri = 0x0a
+#if !defined(JSONCONS_NO_DEPRECATED)
+    , big_integer = bigint
+    , big_decimal = bigdec
+    , big_float = bigfloat
+    , date_time = datetime
+#endif
+};
+
+inline
+std::ostream& operator<<(std::ostream& os, semantic_tag tag)
+{
+    switch (tag)
+    {
+        case semantic_tag::none:
+        {
+            os << "n/a";
+            break;
+        }
+        case semantic_tag::undefined:
+        {
+            os << "undefined";
+            break;
+        }
+        case semantic_tag::datetime:
+        {
+            os << "datetime";
+            break;
+        }
+        case semantic_tag::timestamp:
+        {
+            os << "timestamp";
+            break;
+        }
+        case semantic_tag::bigint:
+        {
+            os << "bigint";
+            break;
+        }
+        case semantic_tag::bigdec:
+        {
+            os << "bigdec";
+            break;
+        }
+        case semantic_tag::bigfloat:
+        {
+            os << "bigfloat";
+            break;
+        }
+        case semantic_tag::base16:
+        {
+            os << "base16";
+            break;
+        }
+        case semantic_tag::base64:
+        {
+            os << "base64";
+            break;
+        }
+        case semantic_tag::base64url:
+        {
+            os << "base64url";
+            break;
+        }
+        case semantic_tag::uri:
+        {
+            os << "uri";
+            break;
+        }
+    }
+    return os;
+}
+
+#if !defined(JSONCONS_NO_DEPRECATED)
+    JSONCONS_DEPRECATED("Instead, use semantic_tag") typedef semantic_tag semantic_tag_type;
+#endif
 
 template <class CharT>
 class basic_json_content_handler
 {
+#if !defined(JSONCONS_NO_DEPRECATED)
+    std::basic_string<CharT> buffer_;
+#endif
 public:
     typedef CharT char_type;
     typedef std::char_traits<char_type> char_traits_type;
 
-    typedef basic_string_view_ext<char_type,char_traits_type> string_view_type;
+    typedef basic_string_view<char_type,char_traits_type> string_view_type;
+
+    basic_json_content_handler(basic_json_content_handler&&) = default;
+
+    basic_json_content_handler& operator=(basic_json_content_handler&&) = default;
+
+    basic_json_content_handler() = default;
 
     virtual ~basic_json_content_handler() {}
 
-    void begin_json()
+    void flush()
     {
-        do_begin_json();
+        do_flush();
     }
 
-    void end_json()
+    bool begin_object(semantic_tag tag=semantic_tag::none,
+                      const ser_context& context=null_ser_context())
     {
-        do_end_json();
+        return do_begin_object(tag, context);
     }
 
-    void begin_object()
+    bool begin_object(size_t length, 
+                      semantic_tag tag=semantic_tag::none, 
+                      const ser_context& context = null_ser_context())
     {
-        do_begin_object(null_serializing_context());
+        return do_begin_object(length, tag, context);
     }
 
-    void begin_object(const serializing_context& context)
+    bool end_object(const ser_context& context = null_ser_context())
     {
-        do_begin_object(context);
+        return do_end_object(context);
     }
 
-    void begin_object(size_t length)
+    bool begin_array(semantic_tag tag=semantic_tag::none,
+                     const ser_context& context=null_ser_context())
     {
-        do_begin_object(length, null_serializing_context());
+        return do_begin_array(tag, context);
     }
 
-    void begin_object(size_t length, const serializing_context& context)
+    bool begin_array(size_t length, 
+                     semantic_tag tag=semantic_tag::none,
+                     const ser_context& context=null_ser_context())
     {
-        do_begin_object(length, context);
+        return do_begin_array(length, tag, context);
     }
 
-    void end_object()
+    bool end_array(const ser_context& context=null_ser_context())
     {
-        do_end_object(null_serializing_context());
+        return do_end_array(context);
     }
 
-    void end_object(const serializing_context& context)
+    bool name(const string_view_type& name, const ser_context& context=null_ser_context())
     {
-        do_end_object(context);
+        return do_name(name, context);
     }
 
-    void begin_array()
+    bool string_value(const string_view_type& value, 
+                      semantic_tag tag = semantic_tag::none, 
+                      const ser_context& context=null_ser_context()) 
     {
-        do_begin_array(null_serializing_context());
+        return do_string_value(value, tag, context);
     }
 
-    void begin_array(size_t length)
+    bool byte_string_value(const byte_string_view& b, 
+                           semantic_tag tag=semantic_tag::none, 
+                           const ser_context& context=null_ser_context())
     {
-        do_begin_array(length, null_serializing_context());
+        return do_byte_string_value(b, tag, context);
     }
 
-    void begin_array(const serializing_context& context)
+    bool byte_string_value(const uint8_t* p, size_t size, 
+                           semantic_tag tag=semantic_tag::none, 
+                           const ser_context& context=null_ser_context())
     {
-        do_begin_array(context);
+        return do_byte_string_value(byte_string(p, size), tag, context);
     }
 
-    void begin_array(size_t length, const serializing_context& context)
+    bool int64_value(int64_t value, 
+                     semantic_tag tag = semantic_tag::none, 
+                     const ser_context& context=null_ser_context())
     {
-        do_begin_array(length, context);
+        return do_int64_value(value, tag, context);
     }
 
-    void end_array()
+    bool uint64_value(uint64_t value, 
+                      semantic_tag tag = semantic_tag::none, 
+                      const ser_context& context=null_ser_context())
     {
-        do_end_array(null_serializing_context());
+        return do_uint64_value(value, tag, context);
     }
 
-    void end_array(const serializing_context& context)
+    bool double_value(double value, 
+                      semantic_tag tag = semantic_tag::none, 
+                      const ser_context& context=null_ser_context())
     {
-        do_end_array(context);
+        return do_double_value(value, tag, context);
     }
 
-    void name(const string_view_type& name)
+    bool bool_value(bool value, 
+                    semantic_tag tag = semantic_tag::none,
+                    const ser_context& context=null_ser_context()) 
     {
-        do_name(name, null_serializing_context());
+        return do_bool_value(value, tag, context);
     }
 
-    void name(const string_view_type& name, const serializing_context& context)
+    bool null_value(semantic_tag tag = semantic_tag::none,
+                    const ser_context& context=null_ser_context()) 
     {
-        do_name(name, context);
-    }
-
-    void string_value(const string_view_type& value) 
-    {
-        do_string_value(value, null_serializing_context());
-    }
-
-    void string_value(const string_view_type& value, const serializing_context& context) 
-    {
-        do_string_value(value, context);
-    }
-
-    void byte_string_value(const uint8_t* data, size_t length) 
-    {
-        do_byte_string_value(data, length, null_serializing_context());
-    }
-
-    void byte_string_value(const uint8_t* data, size_t length, const serializing_context& context) 
-    {
-        do_byte_string_value(data, length, context);
-    }
-
-    void integer_value(int64_t value)
-    {
-        do_integer_value(value,null_serializing_context());
-    }
-
-    void integer_value(int64_t value, const serializing_context& context)
-    {
-        do_integer_value(value,context);
-    }
-
-    void uinteger_value(uint64_t value)
-    {
-        do_uinteger_value(value,null_serializing_context());
-    }
-
-    void uinteger_value(uint64_t value, const serializing_context& context)
-    {
-        do_uinteger_value(value,context);
-    }
-
-    void double_value(double value)
-    {
-        do_double_value(value, number_format(), null_serializing_context());
-    }
-
-    void double_value(double value, uint8_t precision)
-    {
-        do_double_value(value, number_format(precision, 0), null_serializing_context());
-    }
-
-    void double_value(double value, const number_format& fmt)
-    {
-        do_double_value(value, fmt, null_serializing_context());
-    }
-
-    void double_value(double value, const serializing_context& context)
-    {
-        do_double_value(value, number_format(), context);
-    }
-
-    void double_value(double value, uint8_t precision, const serializing_context& context)
-    {
-        do_double_value(value, number_format(precision, 0), context);
-    }
-
-    void double_value(double value, const number_format& fmt, const serializing_context& context)
-    {
-        do_double_value(value, fmt, context);
-    }
-
-    void bool_value(bool value) 
-    {
-        do_bool_value(value,null_serializing_context());
-    }
-
-    void bool_value(bool value, const serializing_context& context) 
-    {
-        do_bool_value(value,context);
-    }
-
-    void null_value() 
-    {
-        do_null_value(null_serializing_context());
-    }
-
-    void null_value(const serializing_context& context) 
-    {
-        do_null_value(context);
+        return do_null_value(tag, context);
     }
 
 #if !defined(JSONCONS_NO_DEPRECATED)
 
-    void name(const CharT* p, size_t length, const serializing_context& context) 
+    JSONCONS_DEPRECATED("Instead, use const byte_string_view&, semantic_tag=semantic_tag::none, const ser_context&=null_ser_context()") 
+    bool byte_string_value(const byte_string_view& b, 
+                           byte_string_chars_format encoding_hint, 
+                           semantic_tag tag=semantic_tag::none, 
+                           const ser_context& context=null_ser_context())
     {
-        do_name(string_view_type(p, length), context);
+        switch (encoding_hint)
+        {
+            case byte_string_chars_format::base16:
+                tag = semantic_tag::base16;
+                break;
+            case byte_string_chars_format::base64:
+                tag = semantic_tag::base64;
+                break;
+            case byte_string_chars_format::base64url:
+                tag = semantic_tag::base64url;
+                break;
+            default:
+                break;
+        }
+        return do_byte_string_value(b, tag, context);
     }
 
-    void value(const std::basic_string<CharT>& value, const serializing_context& context) 
+    JSONCONS_DEPRECATED("Instead, use const byte_string_view&, semantic_tag=semantic_tag::none, const ser_context&=null_ser_context()") 
+    bool byte_string_value(const uint8_t* p, size_t size, 
+                           byte_string_chars_format encoding_hint, 
+                           semantic_tag tag=semantic_tag::none, 
+                           const ser_context& context=null_ser_context())
     {
-        do_string_value(value, context);
+        switch (encoding_hint)
+        {
+            case byte_string_chars_format::base16:
+                tag = semantic_tag::base16;
+                break;
+            case byte_string_chars_format::base64:
+                tag = semantic_tag::base64;
+                break;
+            case byte_string_chars_format::base64url:
+                tag = semantic_tag::base64url;
+                break;
+            default:
+                break;
+        }
+        return do_byte_string_value(byte_string(p, size), tag, context);
+    }
+    bool big_integer_value(const string_view_type& s, const ser_context& context=null_ser_context()) 
+    {
+        return do_string_value(s, semantic_tag::bigint, context);
     }
 
-    void value(const CharT* p, size_t length, const serializing_context& context) 
+    bool big_decimal_value(const string_view_type& s, const ser_context& context=null_ser_context()) 
     {
-        do_string_value(string_view_type(p, length), context);
+        return do_string_value(s, semantic_tag::bigdec, context);
     }
 
-    void value(const CharT* p, const serializing_context& context)
+    bool date_time_value(const string_view_type& s, const ser_context& context=null_ser_context()) 
     {
-        do_string_value(string_view_type(p), context);
+        return do_string_value(s, semantic_tag::datetime, context);
     }
 
-    void value(int value, const serializing_context& context) 
+    bool timestamp_value(int64_t val, const ser_context& context=null_ser_context()) 
     {
-        do_integer_value(value,context);
+        return do_int64_value(val, semantic_tag::timestamp, context);
     }
 
-    void value(long value, const serializing_context& context) 
+    JSONCONS_DEPRECATED("Not needed") 
+    bool begin_document()
     {
-        do_integer_value(value,context);
+        return true;
     }
 
-    void value(long long value, const serializing_context& context) 
+    JSONCONS_DEPRECATED("Instead, use flush() when serializing") 
+    bool end_document()
     {
-        do_integer_value(value,context);
+        flush();
+        return true;
     }
 
-    void value(unsigned int value, const serializing_context& context) 
+    JSONCONS_DEPRECATED("Not needed") 
+    void begin_json()
     {
-        do_uinteger_value(value,context);
     }
 
-    void value(unsigned long value, const serializing_context& context) 
+    JSONCONS_DEPRECATED("Instead, use flush() when serializing") 
+    void end_json()
     {
-        do_uinteger_value(value,context);
+        end_document();
     }
 
-    void value(unsigned long long value, const serializing_context& context) 
+    void name(const CharT* p, size_t length, const ser_context& context) 
     {
-        do_uinteger_value(value,context);
+        name(string_view_type(p, length), context);
     }
 
-    void value(float value, uint8_t precision, const serializing_context& context)
+    void integer_value(int64_t value)
     {
-        do_double_value(value, number_format(precision, 0), context);
+        int64_value(value);
     }
 
-    void value(double value, uint8_t precision, const serializing_context& context)
+    void integer_value(int64_t value, const ser_context& context)
     {
-        do_double_value(value, number_format(precision, 0), context);
+        int64_value(value,context);
     }
 
-    void value(bool value, const serializing_context& context) 
+    void uinteger_value(uint64_t value)
     {
-        do_bool_value(value,context);
+        uint64_value(value);
     }
 
-    void value(null_type, const serializing_context& context)
+    void uinteger_value(uint64_t value, const ser_context& context)
     {
-        do_null_value(context);
+        uint64_value(value,context);
     }
+
+    bool bignum_value(const string_view_type& s, const ser_context& context=null_ser_context()) 
+    {
+        return do_string_value(s, semantic_tag::bigint, context);
+    }
+
+    bool decimal_value(const string_view_type& s, const ser_context& context=null_ser_context()) 
+    {
+        return do_string_value(s, semantic_tag::bigdec, context);
+    }
+
+    bool epoch_time_value(int64_t val, const ser_context& context=null_ser_context()) 
+    {
+        return do_int64_value(val, semantic_tag::timestamp, context);
+    }
+
 #endif
 
 private:
-    virtual void do_begin_json() = 0;
+    virtual void do_flush() = 0;
 
-    virtual void do_end_json() = 0;
+    virtual bool do_begin_object(semantic_tag, const ser_context& context) = 0;
 
-    virtual void do_begin_object(const serializing_context& context) = 0;
-
-    virtual void do_begin_object(size_t length, const serializing_context& context) 
+    virtual bool do_begin_object(size_t, semantic_tag tag, const ser_context& context)
     {
-        do_begin_object(context);
+        return do_begin_object(tag, context);
     }
 
-    virtual void do_end_object(const serializing_context& context) = 0;
+    virtual bool do_end_object(const ser_context& context) = 0;
 
-    virtual void do_begin_array(const serializing_context& context) = 0;
+    virtual bool do_begin_array(semantic_tag, const ser_context& context) = 0;
 
-    virtual void do_begin_array(size_t length, const serializing_context& context) 
+    virtual bool do_begin_array(size_t, semantic_tag tag, const ser_context& context)
     {
-        do_begin_array(context);
+        return do_begin_array(tag, context);
     }
 
-    virtual void do_end_array(const serializing_context& context) = 0;
+    virtual bool do_end_array(const ser_context& context) = 0;
 
-    virtual void do_name(const string_view_type& name, const serializing_context& context) = 0;
+    virtual bool do_name(const string_view_type& name, const ser_context& context) = 0;
 
-    virtual void do_null_value(const serializing_context& context) = 0;
+    virtual bool do_null_value(semantic_tag, const ser_context& context) = 0;
 
-    virtual void do_string_value(const string_view_type& value, const serializing_context& context) = 0;
+    virtual bool do_string_value(const string_view_type& value, semantic_tag tag, const ser_context& context) = 0;
 
-    virtual void do_byte_string_value(const uint8_t* data, size_t length, const serializing_context& context) = 0;
+    virtual bool do_byte_string_value(const byte_string_view& b, 
+                                      semantic_tag tag, 
+                                      const ser_context& context) = 0;
 
-    virtual void do_double_value(double value, const number_format& fmt, const serializing_context& context) = 0;
+    virtual bool do_double_value(double value, 
+                                 semantic_tag tag,
+                                 const ser_context& context) = 0;
 
-    virtual void do_integer_value(int64_t value, const serializing_context& context) = 0;
+    virtual bool do_int64_value(int64_t value, 
+                                semantic_tag tag,
+                                const ser_context& context) = 0;
 
-    virtual void do_uinteger_value(uint64_t value, const serializing_context& context) = 0;
+    virtual bool do_uint64_value(uint64_t value, 
+                                 semantic_tag tag, 
+                                 const ser_context& context) = 0;
 
-    virtual void do_bool_value(bool value, const serializing_context& context) = 0;
+    virtual bool do_bool_value(bool value, semantic_tag tag, const ser_context& context) = 0;
 };
 
 template <class CharT>
 class basic_null_json_content_handler final : public basic_json_content_handler<CharT>
 {
 public:
-    using typename basic_json_content_handler<CharT>::string_view_type                                 ;
+    using typename basic_json_content_handler<CharT>::string_view_type;
 private:
-    void do_begin_json() override
+    void do_flush() override
     {
     }
 
-    void do_end_json() override
+    bool do_begin_object(semantic_tag, const ser_context&) override
     {
+        return true;
     }
 
-    void do_begin_object(const serializing_context&) override
+    bool do_end_object(const ser_context&) override
     {
+        return true;
     }
 
-    void do_end_object(const serializing_context&) override
+    bool do_begin_array(semantic_tag, const ser_context&) override
     {
+        return true;
     }
 
-    void do_begin_array(const serializing_context&) override
+    bool do_end_array(const ser_context&) override
     {
+        return true;
     }
 
-    void do_end_array(const serializing_context&) override
+    bool do_name(const string_view_type&, const ser_context&) override
     {
+        return true;
     }
 
-    void do_name(const string_view_type&, const serializing_context&) override
+    bool do_null_value(semantic_tag, const ser_context&) override
     {
+        return true;
     }
 
-    void do_null_value(const serializing_context&) override
+    bool do_string_value(const string_view_type&, semantic_tag, const ser_context&) override
     {
+        return true;
     }
 
-    void do_string_value(const string_view_type&, const serializing_context&) override
+    bool do_byte_string_value(const byte_string_view&,
+                              semantic_tag, 
+                              const ser_context&) override
     {
+        return true;
     }
 
-    void do_byte_string_value(const uint8_t* data, size_t length, const serializing_context&) override
+    bool do_int64_value(int64_t, 
+                        semantic_tag, 
+                        const ser_context&) override
     {
+        return true;
     }
 
-    void do_double_value(double, const number_format& fmt, const serializing_context&) override
+    bool do_uint64_value(uint64_t, 
+                         semantic_tag, 
+                         const ser_context&) override
     {
+        return true;
     }
 
-    void do_integer_value(int64_t, const serializing_context&) override
+    bool do_double_value(double, 
+                         semantic_tag,
+                         const ser_context&) override
     {
+        return true;
     }
 
-    void do_uinteger_value(uint64_t, const serializing_context&) override
+    bool do_bool_value(bool, semantic_tag, const ser_context&) override
     {
-    }
-
-    void do_bool_value(bool, const serializing_context&) override
-    {
+        return true;
     }
 };
 

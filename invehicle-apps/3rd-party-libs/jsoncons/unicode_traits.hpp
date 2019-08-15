@@ -13,8 +13,18 @@
  * Unicode Standard."
 */
 
-#ifndef UNICONS_UNICODE_TRAITS_HPP
-#define UNICONS_UNICODE_TRAITS_HPP
+#ifndef JSONCONS_UNICONS_UNICODE_TRAITS_HPP
+#define JSONCONS_UNICONS_UNICODE_TRAITS_HPP
+
+#if defined(__clang__) 
+#  define UNICONS_FALLTHROUGH [[clang::fallthrough]]
+#elif defined(__GNUC__) && ((__GNUC__ >= 7))
+#  define UNICONS_FALLTHROUGH __attribute__((fallthrough))
+#elif defined (__GNUC__)
+#  define UNICONS_FALLTHROUGH // FALLTHRU
+#else
+#  define UNICONS_FALLTHROUGH
+#endif
 
 #if defined (__clang__)
 #if defined(_GLIBCXX_USE_NOEXCEPT)
@@ -39,7 +49,7 @@
 #include <type_traits>
 #include <system_error>
 
-namespace unicons {
+namespace jsoncons { namespace unicons {
 
 /*
  * Magic values subtracted from a buffer value during UTF8 conversion.
@@ -229,20 +239,6 @@ std::error_code make_error_code(encoding_errc result)
 {
     return std::error_code(static_cast<int>(result),encoding_error_category());
 }
-}
-
-namespace std {
-    template<>
-    struct is_error_code_enum<unicons::conv_errc> : public true_type
-    {
-    };
-    template<>
-    struct is_error_code_enum<unicons::encoding_errc> : public true_type
-    {
-    };
-}
-
-namespace unicons {
 
 // utf8
 
@@ -260,11 +256,11 @@ is_legal_utf8(Iterator first, size_t length)
     case 4:
         if (((a = (*--srcptr))& 0xC0) != 0x80)
             return conv_errc::expected_continuation_byte;
-        // FALLTHRU
+        UNICONS_FALLTHROUGH;
     case 3:
         if (((a = (*--srcptr))& 0xC0) != 0x80)
             return conv_errc::expected_continuation_byte;
-        // FALLTHRU
+        UNICONS_FALLTHROUGH;
     case 2:
         if (((a = (*--srcptr))& 0xC0) != 0x80)
             return conv_errc::expected_continuation_byte;
@@ -279,11 +275,11 @@ is_legal_utf8(Iterator first, size_t length)
             default:   if (a < 0x80) return conv_errc::source_illegal;
         }
 
-        // FALLTHRU
+        UNICONS_FALLTHROUGH;
     case 1:
         if (static_cast<uint8_t>(*first) >= 0x80 && static_cast<uint8_t>(*first) < 0xC2)
             return conv_errc::source_illegal;
-        // FALLTHRU
+        break;
     }
     if (static_cast<uint8_t>(*first) > 0xF4) 
         return conv_errc::source_illegal;
@@ -373,8 +369,11 @@ convert(InputIt first, InputIt last, OutputIt target, conv_flags flags=conv_flag
 
         switch (length) {
             case 4: *target++ = (static_cast<uint8_t>(*first++));
+                UNICONS_FALLTHROUGH;
             case 3: *target++ = (static_cast<uint8_t>(*first++));
+                UNICONS_FALLTHROUGH;
             case 2: *target++ = (static_cast<uint8_t>(*first++));
+                UNICONS_FALLTHROUGH;
             case 1: *target++ = (static_cast<uint8_t>(*first++));
         }
     }
@@ -473,13 +472,31 @@ convert(InputIt first, InputIt last,
         /*
          * The cases all fall through. See "Note A" below.
          */
-        switch (extra_bytes_to_read) {
-            case 5: ch += static_cast<uint8_t>(*first++); ch <<= 6;
-            case 4: ch += static_cast<uint8_t>(*first++); ch <<= 6;
-            case 3: ch += static_cast<uint8_t>(*first++); ch <<= 6;
-            case 2: ch += static_cast<uint8_t>(*first++); ch <<= 6;
-            case 1: ch += static_cast<uint8_t>(*first++); ch <<= 6;
-            case 0: ch += static_cast<uint8_t>(*first++);
+        switch (extra_bytes_to_read) 
+        {
+            case 5: 
+                ch += static_cast<uint8_t>(*first++); 
+                ch <<= 6;
+                UNICONS_FALLTHROUGH;
+            case 4: 
+                ch += static_cast<uint8_t>(*first++); 
+                ch <<= 6;
+                UNICONS_FALLTHROUGH;
+            case 3: 
+                ch += static_cast<uint8_t>(*first++); 
+                ch <<= 6;
+                UNICONS_FALLTHROUGH;
+            case 2: 
+                ch += static_cast<uint8_t>(*first++); 
+                ch <<= 6;
+                UNICONS_FALLTHROUGH;
+            case 1: 
+                ch += static_cast<uint8_t>(*first++); 
+                ch <<= 6;
+                UNICONS_FALLTHROUGH;
+            case 0: 
+                ch += static_cast<uint8_t>(*first++);
+                break;
         }
         ch -= offsets_from_utf8[extra_bytes_to_read];
 
@@ -743,13 +760,13 @@ convert(InputIt first, InputIt last,
         switch (bytes_to_write) {
         case 4:
             byte4 = (uint8_t)((ch | byteMark) & byteMask); ch >>= 6;
-            // FALLTHRU
+            UNICONS_FALLTHROUGH;
         case 3:
             byte3 = (uint8_t)((ch | byteMark) & byteMask); ch >>= 6;
-            // FALLTHRU
+            UNICONS_FALLTHROUGH;
         case 2:
             byte2 = (uint8_t)((ch | byteMark) & byteMask); ch >>= 6;
-            // FALLTHRU
+            UNICONS_FALLTHROUGH;
         case 1:
             byte1 = (uint8_t) (ch | first_byte_mark[bytes_to_write]);
         }
@@ -983,13 +1000,13 @@ public:
             break;
         case 4:
             ch += static_cast<uint8_t>(*it++); ch <<= 6;
-            // FALLTHRU
+            UNICONS_FALLTHROUGH;
         case 3:
             ch += static_cast<uint8_t>(*it++); ch <<= 6;
-            // FALLTHRU
+            UNICONS_FALLTHROUGH;
         case 2:
             ch += static_cast<uint8_t>(*it++); ch <<= 6;
-            // FALLTHRU
+            UNICONS_FALLTHROUGH;
         case 1:
             ch += static_cast<uint8_t>(*it++);
             ch -= offsets_from_utf8[length_ - 1];
@@ -1457,6 +1474,18 @@ skip_bom(Iterator first, Iterator last) UNICONS_NOEXCEPT
     }
 }
 
+} // unicons
+} // jsoncons
+
+namespace std {
+    template<>
+    struct is_error_code_enum<jsoncons::unicons::conv_errc> : public true_type
+    {
+    };
+    template<>
+    struct is_error_code_enum<jsoncons::unicons::encoding_errc> : public true_type
+    {
+    };
 }
 
 #endif
