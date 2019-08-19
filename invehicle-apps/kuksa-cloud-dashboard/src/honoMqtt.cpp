@@ -56,7 +56,9 @@ void HonoMqtt::connect (string honoAddr , string clientID, string userName, stri
    p_Client = new mqtt::async_client (honoAddr, clientID);
    p_Client->set_callback(*this);
    mqtt::connect_options connOpts;
+   connOpts.set_connection_timeout(3);
    connOpts.set_keep_alive_interval(20);
+   connOpts.set_automatic_reconnect(true);
    connOpts.set_clean_session(true);
    connOpts.set_user_name(userName);
    connOpts.set_password(password);
@@ -78,10 +80,13 @@ void HonoMqtt::publish (string topic, string data) {
     action_listener_pub listener;
     mqtt::message_ptr pubmsg = mqtt::make_message(topic, data);
     mqtt::delivery_token_ptr pubtok;
-    pubtok = p_Client->publish(pubmsg, nullptr, listener);
-    pubtok->wait();
-    cout << "Published." << endl;
-    
+    try {
+      pubtok = p_Client->publish(pubmsg, nullptr, listener);
+      pubtok->wait();
+      cout << "Published." << endl;
+    } catch (const mqtt::exception& exc) {
+      cerr << exc.what() << endl;
+    }
 }
 
 void HonoMqtt::disconnect() {
