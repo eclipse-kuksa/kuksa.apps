@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="0.1.0"
+VERSION="0.1.3"
 NAME="cloud-dashboard"
 
 if [ -z "$VERSION" ]; then

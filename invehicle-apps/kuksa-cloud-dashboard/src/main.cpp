@@ -11,26 +11,22 @@
  *      Robert Bosch GmbH - initial API and functionality
  * *****************************************************************************
  */
- 
-#include <json.hpp>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <fstream> 
 #include <iostream>
-#include <fstream>
 #include <unistd.h>
+#include <json.hpp>
+#include <sys/time.h>  
 #include "client_wss.hpp"
 #include "honoMqtt.hpp"
 #include "emailHTTP.hpp"
 
+
 // delay between sending each signals in microseconds
 #define SENDDELAY 50000
-
 #define MAX_ERRORS 10
-
-#define USER_EMAIL_FILE "/mnt/email"
-
-
 
 using namespace std;
 
@@ -38,43 +34,47 @@ using WssClient = SimpleWeb::SocketClient<SimpleWeb::WSS>;
 using namespace jsoncons;
 using jsoncons::json;
 
+const std::string CLIENT_ID = "cloud-dashboard";
+const string PUB_TOPIC = "telemetry";
+
 std::string query;
 
+// WSS connection to w3c-server settings
+shared_ptr<WssClient::Connection> connection = NULL;
 string url = "localhost:8090/vss";
 
-bool honoConnect = true;
-
+// CMD line args
 char honoAddress[256];
 char honoPort[32];
 char honoDevice[256];
 char honoPassword[256];
-
-
 char TOKEN[2048];
-shared_ptr<WssClient::Connection> connection = NULL;
-
-// email settings
-bool mailsent[MAX_ERRORS];
-string emailID ="";
 char emailServerAddress[256];
 char emailServerPort[64];
+
+// E-mail settings
+#define USER_EMAIL_FILE "/mnt/email"
+bool mailsent[MAX_ERRORS];
+string emailID ="";
 string emailTemplate;
 
+// MQTT Buffer settings
+int  offlineBufferSize = 1024; // Max number of msgs to be buffered. This is default can be modified using cml line
+int connAlive = 10 * 60; // keep connection alive for 10 mins this also means the bufferening will happen for max 10 mins. Can be modified useing cmd line 
 
-const std::string CLIENT_ID { "cloud-dashboard" };
-
-const string PUB_TOPIC {"telemetry"};
-string fullTopic;
-
-const int QOS = 0;
-
-const auto TIMEOUT = std::chrono::seconds(10);
-
-class HonoMqtt* honoConn;
+// MQTT Adapter connection for Hono.
+HonoMqtt* honoConn;
 
 // callback method for receiving messages from hono.
 void onMessageFromHono(string message) {
-   cout<<"Publish msg from Hono = " << message << endl;
+    cout<<"Publish msg from Hono = " << message << endl;
+}
+
+// get current time in ms
+long int currentTimeMillis() {
+   struct timeval tp;
+   gettimeofday(&tp , NULL);
+   return ((tp.tv_sec*1000) + (tp.tv_usec / 1000));
 }
 
 
@@ -176,13 +176,16 @@ void sendEmailToOwner( string resp) {
   }
 }
 
+
+
+// Send msgs to Hono
 void sendToHono( string resp) {
 
     cout << "Response >> " << resp << endl;
     json root;
     root = json::parse(resp);
     string action = root["action"].as<string>();
-    
+
     if( action == "authorize") {
         return;
     } else if ( root.has_key("error")) {
@@ -203,12 +206,16 @@ void sendToHono( string resp) {
         return;
     } 
 
-
     std::string value = root["value"].as<string>();
        
     int reqID = root["requestId"].as<int>();
     string signal;
     json valJson;
+   
+    
+    long int now = currentTimeMillis();
+    cout << "timestamp "<< now << endl;
+    valJson["time"] = now;
     
     if(reqID == 1234) {
        signal = "RPM";
@@ -218,40 +225,52 @@ void sendToHono( string resp) {
        signal = "SPEED";
        int val = stoi(value, nullptr, 10);
        valJson[signal] = val;
-    } else if (reqID == 1236) {
-       signal = "ERROR";
-       int val = 0;
-       if(value == "true") {
-           val = 1;
-       }
-       valJson[signal] = val;  
-    } else if (reqID == 1237) {
-       signal = "ERROR2";
-       int val = 0;
-       if(value == "true") {
-           val = 1;
-       }
-       valJson[signal] = val;  
-    } else if (reqID == 1238) {
-       signal = "ERROR3";
-       int val = 0;
-       if(value == "true")
-           val = 1;
-       valJson[signal] = val;    
     } else if (reqID == 1239) {
        signal = "FUEL";
        int val = stoi(value, nullptr, 10);
        valJson[signal] = val;
+    } else if (reqID == 2222) {
+       signal = "CATTEMP";
+       std::string::size_type sz;
+       float val = stof(value, &sz);
+       valJson[signal] = val;
+    } else if (reqID == 2223) {
+       signal = "COOLTEMP";
+       int val = stoi(value, nullptr, 10);
+       valJson[signal] = val;
+    } else if (reqID == 2224) {
+       signal = "THROTTLEPOS";
+       int val = stoi(value, nullptr, 10);
+       valJson[signal] = val;
+    } else if (reqID == 2225) {
+       signal = "ACCPEDALPOS";
+       int val = stoi(value, nullptr, 10);
+       valJson[signal] = val;
+    }
+       else if (reqID == 1240) {
+       signal = "GPS";
+       json gps_value = json::parse(value);
+       value = gps_value["Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude"].as<string>();
+       if (value == "---") {
+          return;
+       }
+       value = value + ",";
+       value = value + gps_value["Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude"].as<string>();
+       valJson[signal] = value;
+       cout << "GPS data = " << value << endl;
     }
 
-    honoConn->publish(PUB_TOPIC, valJson.as<string>());
-    
+
+    try {
+       honoConn->publish(valJson.as<string>());
+    } catch ( mqtt::exception& e) {
+       cout << "Exception occured while publishing msg " << e.what() << endl;
+    }
 }
 
 
 void* sendSensorValues (void* arg) {
-
-  if(honoConnect) {
+  
   usleep(SENDDELAY);
   auto send_stream = make_shared<WssClient::SendStream>();
 
@@ -272,7 +291,7 @@ void* sendSensorValues (void* arg) {
       cout << honoAddr << endl;
       string userName = string(honoDevice) + "@DEFAULT_TENANT";
       string password(honoPassword);
-      honoConn->connect(honoAddr, CLIENT_ID, userName, password);
+      honoConn->connect(honoAddr, CLIENT_ID, userName, password, offlineBufferSize, connAlive);
       honoConn->setMessageCB(onMessageFromHono);
    } catch ( mqtt::exception& e) {
 
@@ -280,7 +299,7 @@ void* sendSensorValues (void* arg) {
 
   // send data to hono instance.
   while(1) {
-   string rpm_req = "{\"action\": \"get\", \"path\": \"Signal.OBD.RPM\", \"requestId\": 1234 }";
+   string rpm_req = "{\"action\": \"get\", \"path\": \"Vehicle.OBD.EngineSpeed\", \"requestId\": 1234 }";
 
     
     *send_stream << rpm_req;
@@ -288,44 +307,56 @@ void* sendSensorValues (void* arg) {
 
 
     usleep(SENDDELAY);  
-    string vSpeed_req = "{\"action\": \"get\", \"path\": \"Signal.OBD.Speed\", \"requestId\": 1235 }";
+    string vSpeed_req = "{\"action\": \"get\", \"path\": \"Vehicle.OBD.Speed\", \"requestId\": 1235 }";
     
     *send_stream << vSpeed_req;
     connection->send(send_stream); 
     
-    
-    usleep(SENDDELAY);
-
-   string dtc2_req = "{\"action\": \"get\", \"path\": \"Signal.OBD.DTC2\", \"requestId\": 1236 }";
-    
-    *send_stream << dtc2_req;
-    connection->send(send_stream);
 
     usleep(SENDDELAY); 
 
-    string dtc3_req = "{\"action\": \"get\", \"path\": \"Signal.OBD.DTC3\", \"requestId\": 1237 }";
-    
-    *send_stream << dtc3_req;
-    connection->send(send_stream);
-
-    usleep(SENDDELAY); 
-
-     string dtc4_req = "{\"action\": \"get\", \"path\": \"Signal.OBD.DTC4\", \"requestId\": 1238 }";
-    
-    *send_stream << dtc4_req;
-    connection->send(send_stream);
-
-    usleep(SENDDELAY); 
-
-    string fuel_req = "{\"action\": \"get\", \"path\": \"Signal.OBD.FuelLevel\", \"requestId\": 1239 }";
+    string fuel_req = "{\"action\": \"get\", \"path\": \"Vehicle.OBD.FuelLevel\", \"requestId\": 1239 }";
     
     *send_stream << fuel_req;
     connection->send(send_stream);
 
     usleep(SENDDELAY); 
+
+    string vlat_req = "{\"action\": \"get\", \"path\": \"Vehicle.Cabin.Infotainment.Navigation.CurrentLocation\", \"requestId\": 1240 }";
+    *send_stream << vlat_req;
+    connection->send(send_stream);
+
+    usleep(SENDDELAY);
+
+    string cat_req = "{\"action\": \"get\", \"path\": \"Vehicle.OBD.Catalyst.Bank1.Temperature1\", \"requestId\": 2222 }";
+    
+    *send_stream << cat_req;
+    connection->send(send_stream); 
+
+
+    usleep(SENDDELAY);  
+    string coolant_req = "{\"action\": \"get\", \"path\": \"Vehicle.OBD.CoolantTemperature\", \"requestId\": 2223 }";
+    
+    *send_stream << coolant_req;
+    connection->send(send_stream); 
+
+
+    usleep(SENDDELAY);  
+    string throttle_req = "{\"action\": \"get\", \"path\": \"Vehicle.OBD.ThrottlePosition\", \"requestId\": 2224 }";
+    
+    *send_stream << throttle_req;
+    connection->send(send_stream); 
+
+
+
+    usleep(SENDDELAY);  
+    string accPos_req = "{\"action\": \"get\", \"path\": \"Vehicle.OBD.AcceleratorPositionD\", \"requestId\": 2225 }";
+    
+    *send_stream << accPos_req;
+    connection->send(send_stream); 
   }
- }
 }
+
 
 void* startWSClient(void * arg) {
 
@@ -364,9 +395,6 @@ void* startWSClient(void * arg) {
 }
 
 
-
-
-
 /**
  * @brief  Test main.
  * @return
@@ -374,34 +402,30 @@ void* startWSClient(void * arg) {
 int main(int argc, char* argv[])
 {
 
-        if(argc == 8) {
-           strcpy(honoAddress , argv[1]);
-           char honoPortStr[16];
-           strcpy(honoPort , argv[2]);
-           strcpy(honoPassword , argv[3]); 
-           strcpy(honoDevice , argv[4]);
-           strcpy(TOKEN, argv[5]);
-           strcpy(emailServerAddress , argv[6]);
-           strcpy(emailServerPort , argv[7]);
-        } else {
-           cerr<<"Usage ./dashboard <HONO-MQTT IP-ADDR> <HONO-MQTT PORT> <HONO-PASSWORD> <HONO-DEVICE NAME> <JWT TOKEN> <EMAIL-SERVER-IP> <EMAIL-SERVER-PORT>"<<endl;
-           return -1; 
-        }
+   if(argc == 10) {
+      strcpy(honoAddress , argv[1]);
+      char honoPortStr[16];
+      strcpy(honoPort , argv[2]); 
+      strcpy(honoDevice , argv[3]);
+      strcpy(honoPassword , argv[4]);
+      offlineBufferSize = stoi(argv[5],nullptr,10);
+      connAlive = stoi(argv[6], nullptr, 10);
+      strcpy(TOKEN, argv[7]);
+      strcpy(emailServerAddress , argv[8]);
+      strcpy(emailServerPort , argv[9]);
+   } else {
+      cerr<<"Usage ./dashboard <HONO-MQTT_IP_ADDR> <HONO_MQTT_PORT> <HONO_DEVICE_NAME> <HONO_PASSWORD> <BUFFER_SIZE> <BUFFER_TIME> <JWT_TOKEN> <EMAIL_SERVER_IP> <EMAIL_SERVER_PORT>"<<endl;
+      return -1; 
+   }
 
-        fullTopic = PUB_TOPIC +"/"+"DEFAULT_TENANT/"+string(honoDevice);
-        cout << "Complete topic for hono mqtt is " << fullTopic << endl;
-        
+   pthread_t startWSClient_thread;
 
-     pthread_t startWSClient_thread;
-
-        /* create the web socket client thread. */
-        if(pthread_create(&startWSClient_thread, NULL, &startWSClient, NULL )) {
-
-         cout << "Error creating websocket client run thread"<<endl;
-         return 1;
-
-        }
-while (1) { usleep (1000000); };
+   /* create the web socket client thread. */
+   if(pthread_create(&startWSClient_thread, NULL, &startWSClient, NULL )) {
+      cout << "Error creating websocket client run thread"<<endl;
+      return 1;
+   }
+   while (1) { usleep (1000000); };
 }
 
 

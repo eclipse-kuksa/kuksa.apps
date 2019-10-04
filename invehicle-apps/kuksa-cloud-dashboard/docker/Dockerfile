@@ -3,7 +3,7 @@ FROM arm64v8/alpine:3.8 AS build-env
 
 COPY kuksa-cloud-dashboard/docker/qemu-aarch64-static /usr/bin/qemu-aarch64-static
 
-RUN apk update && apk add cmake alpine-sdk boost-dev boost-system boost-thread openssl-dev libstdc++
+RUN apk update && apk add curl cmake alpine-sdk boost-dev boost-system boost-thread openssl-dev libstdc++
 
 ADD . /app
 WORKDIR /app/kuksa-cloud-dashboard
@@ -14,7 +14,7 @@ RUN cd build && make
 
 
 #Transferring build artifacts to minimal docker
-FROM arm64v8/alpine:3.8
+FROM arm64v8/alpine:3.8 
 #For debugging uncomment, and replae copy with real install to see what is missing... 
 #RUN apk update && apk add openssl boost-system boost-thread libstdc++ 
 COPY --from=build-env /lib/libssl.so.1.0.0   /lib/
