@@ -11,3 +11,6 @@ A demo android app that showcases the capabilities of kuksa invehicle and kuksa 
 The app works well with the Kuksa-Dongle.
 
 More infos to follow...
+
+
+![Alt text](./images/app.png?raw=true "kuksa android app")
