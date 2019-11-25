@@ -53,13 +53,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 10: {
             org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors.Builder subBuilder = null;
             if (geometryCase_ == 1) {
@@ -97,6 +90,13 @@ private static final long serialVersionUID = 0L;
                 input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry));
             break;
           }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -117,6 +117,7 @@ private static final long serialVersionUID = 0L;
     return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_fieldAccessorTable
@@ -247,13 +248,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               org.sensoris.types.spatial.XyzVectorAndAccuracy.Builder subBuilder = null;
               if (firstAndAccuracy_ != null) {
@@ -293,6 +287,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -310,6 +311,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CornerVectors_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CornerVectors_fieldAccessorTable
@@ -417,6 +419,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -426,6 +429,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (firstAndAccuracy_ != null) {
@@ -440,6 +444,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -586,6 +591,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -593,6 +599,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -621,6 +628,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CornerVectors_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CornerVectors_fieldAccessorTable
@@ -643,6 +651,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (firstAndAccuracyBuilder_ == null) {
@@ -666,15 +675,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CornerVectors_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors getDefaultInstanceForType() {
         return org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors build() {
         org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors result = buildPartial();
         if (!result.isInitialized()) {
@@ -683,6 +695,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors buildPartial() {
         org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors result = new org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors(this);
         if (firstAndAccuracyBuilder_ == null) {
@@ -704,32 +717,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors) {
           return mergeFrom((org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors)other);
@@ -755,10 +775,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1235,11 +1257,13 @@ private static final long serialVersionUID = 0L;
         }
         return thirdAndAccuracyBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1261,6 +1285,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<CornerVectors>
         PARSER = new com.google.protobuf.AbstractParser<CornerVectors>() {
+      @java.lang.Override
       public CornerVectors parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1278,6 +1303,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.types.spatial.RectangularBoxAndAccuracy.CornerVectors getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1411,13 +1437,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               org.sensoris.types.spatial.PositionAndAccuracy.Builder subBuilder = null;
               if (centerPositionAndAccuracy_ != null) {
@@ -1457,6 +1476,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1474,6 +1500,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CenterOrientationSize_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CenterOrientationSize_fieldAccessorTable
@@ -1584,6 +1611,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1593,6 +1621,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (centerPositionAndAccuracy_ != null) {
@@ -1607,6 +1636,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1753,6 +1783,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1760,6 +1791,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1789,6 +1821,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CenterOrientationSize_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CenterOrientationSize_fieldAccessorTable
@@ -1811,6 +1844,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (centerPositionAndAccuracyBuilder_ == null) {
@@ -1834,15 +1868,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_CenterOrientationSize_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize getDefaultInstanceForType() {
         return org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize build() {
         org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize result = buildPartial();
         if (!result.isInitialized()) {
@@ -1851,6 +1888,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize buildPartial() {
         org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize result = new org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize(this);
         if (centerPositionAndAccuracyBuilder_ == null) {
@@ -1872,32 +1910,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize) {
           return mergeFrom((org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize)other);
@@ -1923,10 +1968,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2412,11 +2459,13 @@ private static final long serialVersionUID = 0L;
         }
         return sizeAndAccuracyBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2438,6 +2487,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<CenterOrientationSize>
         PARSER = new com.google.protobuf.AbstractParser<CenterOrientationSize>() {
+      @java.lang.Override
       public CenterOrientationSize parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2455,6 +2505,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.types.spatial.RectangularBoxAndAccuracy.CenterOrientationSize getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2632,6 +2683,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -2641,6 +2693,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (geometryCase_ == 1) {
@@ -2655,6 +2708,7 @@ private static final long serialVersionUID = 0L;
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -2807,6 +2861,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -2814,6 +2869,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(org.sensoris.types.spatial.RectangularBoxAndAccuracy prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -2847,6 +2903,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_fieldAccessorTable
@@ -2870,6 +2927,7 @@ private static final long serialVersionUID = 0L;
         getExtensionFieldBuilder();
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       if (extensionBuilder_ == null) {
@@ -2883,15 +2941,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return org.sensoris.types.spatial.SensorisSpatialTypes.internal_static_sensoris_protobuf_types_spatial_RectangularBoxAndAccuracy_descriptor;
     }
 
+    @java.lang.Override
     public org.sensoris.types.spatial.RectangularBoxAndAccuracy getDefaultInstanceForType() {
       return org.sensoris.types.spatial.RectangularBoxAndAccuracy.getDefaultInstance();
     }
 
+    @java.lang.Override
     public org.sensoris.types.spatial.RectangularBoxAndAccuracy build() {
       org.sensoris.types.spatial.RectangularBoxAndAccuracy result = buildPartial();
       if (!result.isInitialized()) {
@@ -2900,6 +2961,7 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public org.sensoris.types.spatial.RectangularBoxAndAccuracy buildPartial() {
       org.sensoris.types.spatial.RectangularBoxAndAccuracy result = new org.sensoris.types.spatial.RectangularBoxAndAccuracy(this);
       int from_bitField0_ = bitField0_;
@@ -2933,32 +2995,39 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
       return (Builder) super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return (Builder) super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return (Builder) super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
       return (Builder) super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof org.sensoris.types.spatial.RectangularBoxAndAccuracy) {
         return mergeFrom((org.sensoris.types.spatial.RectangularBoxAndAccuracy)other);
@@ -3014,10 +3083,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3707,11 +3778,13 @@ private static final long serialVersionUID = 0L;
       }
       return extensionBuilder_;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFieldsProto3(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -3733,6 +3806,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<RectangularBoxAndAccuracy>
       PARSER = new com.google.protobuf.AbstractParser<RectangularBoxAndAccuracy>() {
+    @java.lang.Override
     public RectangularBoxAndAccuracy parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3750,6 +3824,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public org.sensoris.types.spatial.RectangularBoxAndAccuracy getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

@@ -47,13 +47,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 8: {
             int rawValue = input.readEnum();
 
@@ -73,6 +66,13 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -90,6 +90,7 @@ private static final long serialVersionUID = 0L;
     return org.sensoris.types.base.SensorisBaseTypes.internal_static_sensoris_protobuf_types_base_EventDetectionStatus_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return org.sensoris.types.base.SensorisBaseTypes.internal_static_sensoris_protobuf_types_base_EventDetectionStatus_fieldAccessorTable
@@ -303,6 +304,7 @@ private static final long serialVersionUID = 0L;
    * <code>.sensoris.protobuf.types.base.EventDetectionStatus.Type type = 1;</code>
    */
   public org.sensoris.types.base.EventDetectionStatus.Type getType() {
+    @SuppressWarnings("deprecation")
     org.sensoris.types.base.EventDetectionStatus.Type result = org.sensoris.types.base.EventDetectionStatus.Type.valueOf(type_);
     return result == null ? org.sensoris.types.base.EventDetectionStatus.Type.UNRECOGNIZED : result;
   }
@@ -341,6 +343,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -350,6 +353,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (type_ != org.sensoris.types.base.EventDetectionStatus.Type.UNKNOWN_TYPE.getNumber()) {
@@ -361,6 +365,7 @@ private static final long serialVersionUID = 0L;
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -488,6 +493,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -495,6 +501,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(org.sensoris.types.base.EventDetectionStatus prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -522,6 +529,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.types.base.SensorisBaseTypes.internal_static_sensoris_protobuf_types_base_EventDetectionStatus_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.types.base.SensorisBaseTypes.internal_static_sensoris_protobuf_types_base_EventDetectionStatus_fieldAccessorTable
@@ -544,6 +552,7 @@ private static final long serialVersionUID = 0L;
               .alwaysUseFieldBuilders) {
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       type_ = 0;
@@ -557,15 +566,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return org.sensoris.types.base.SensorisBaseTypes.internal_static_sensoris_protobuf_types_base_EventDetectionStatus_descriptor;
     }
 
+    @java.lang.Override
     public org.sensoris.types.base.EventDetectionStatus getDefaultInstanceForType() {
       return org.sensoris.types.base.EventDetectionStatus.getDefaultInstance();
     }
 
+    @java.lang.Override
     public org.sensoris.types.base.EventDetectionStatus build() {
       org.sensoris.types.base.EventDetectionStatus result = buildPartial();
       if (!result.isInitialized()) {
@@ -574,6 +586,7 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public org.sensoris.types.base.EventDetectionStatus buildPartial() {
       org.sensoris.types.base.EventDetectionStatus result = new org.sensoris.types.base.EventDetectionStatus(this);
       result.type_ = type_;
@@ -586,32 +599,39 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
       return (Builder) super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return (Builder) super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return (Builder) super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
       return (Builder) super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof org.sensoris.types.base.EventDetectionStatus) {
         return mergeFrom((org.sensoris.types.base.EventDetectionStatus)other);
@@ -634,10 +654,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -687,6 +709,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.types.base.EventDetectionStatus.Type type = 1;</code>
      */
     public org.sensoris.types.base.EventDetectionStatus.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.types.base.EventDetectionStatus.Type result = org.sensoris.types.base.EventDetectionStatus.Type.valueOf(type_);
       return result == null ? org.sensoris.types.base.EventDetectionStatus.Type.UNRECOGNIZED : result;
     }
@@ -872,11 +895,13 @@ private static final long serialVersionUID = 0L;
       }
       return confidenceBuilder_;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFieldsProto3(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -898,6 +923,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<EventDetectionStatus>
       PARSER = new com.google.protobuf.AbstractParser<EventDetectionStatus>() {
+    @java.lang.Override
     public EventDetectionStatus parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -915,6 +941,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public org.sensoris.types.base.EventDetectionStatus getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

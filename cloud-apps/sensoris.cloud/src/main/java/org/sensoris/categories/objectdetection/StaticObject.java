@@ -56,13 +56,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 10: {
             org.sensoris.types.base.EventEnvelope.Builder subBuilder = null;
             if (envelope_ != null) {
@@ -191,6 +184,13 @@ private static final long serialVersionUID = 0L;
                 input.readMessage(org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.parser(), extensionRegistry));
             break;
           }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -211,6 +211,7 @@ private static final long serialVersionUID = 0L;
     return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_fieldAccessorTable
@@ -309,13 +310,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -335,6 +329,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -352,6 +353,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_TypeAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_TypeAndConfidence_fieldAccessorTable
@@ -892,6 +894,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.objectdetection.StaticObject.TypeAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type result = org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -930,6 +933,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -939,6 +943,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -950,6 +955,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1077,6 +1083,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1084,6 +1091,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1112,6 +1120,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_TypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_TypeAndConfidence_fieldAccessorTable
@@ -1134,6 +1143,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -1147,15 +1157,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_TypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence build() {
         org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -1164,6 +1177,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence buildPartial() {
         org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence result = new org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence(this);
         result.type_ = type_;
@@ -1176,32 +1190,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence) {
           return mergeFrom((org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence)other);
@@ -1224,10 +1245,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1277,6 +1300,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.objectdetection.StaticObject.TypeAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type result = org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -1462,11 +1486,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1488,6 +1514,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<TypeAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<TypeAndConfidence>() {
+      @java.lang.Override
       public TypeAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1505,6 +1532,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.objectdetection.StaticObject.TypeAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1724,13 +1752,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               org.sensoris.types.spatial.PositionAndAccuracy.Builder subBuilder = null;
               if (lowerPositionAndAccuracy_ != null) {
@@ -1792,6 +1813,13 @@ private static final long serialVersionUID = 0L;
                   input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry));
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1812,6 +1840,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_ConeAndAccuracy_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_ConeAndAccuracy_fieldAccessorTable
@@ -2029,6 +2058,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2038,6 +2068,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (lowerPositionAndAccuracy_ != null) {
@@ -2058,6 +2089,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2227,6 +2259,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2234,6 +2267,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2261,6 +2295,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_ConeAndAccuracy_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_ConeAndAccuracy_fieldAccessorTable
@@ -2284,6 +2319,7 @@ private static final long serialVersionUID = 0L;
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (lowerPositionAndAccuracyBuilder_ == null) {
@@ -2319,15 +2355,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_ConeAndAccuracy_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy getDefaultInstanceForType() {
         return org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy build() {
         org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy result = buildPartial();
         if (!result.isInitialized()) {
@@ -2336,6 +2375,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy buildPartial() {
         org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy result = new org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy(this);
         int from_bitField0_ = bitField0_;
@@ -2374,32 +2414,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy) {
           return mergeFrom((org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy)other);
@@ -2454,10 +2501,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3463,11 +3512,13 @@ private static final long serialVersionUID = 0L;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -3489,6 +3540,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<ConeAndAccuracy>
         PARSER = new com.google.protobuf.AbstractParser<ConeAndAccuracy>() {
+      @java.lang.Override
       public ConeAndAccuracy parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3506,6 +3558,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.objectdetection.StaticObject.ConeAndAccuracy getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -3603,13 +3656,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -3629,6 +3675,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3646,6 +3699,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceTypeAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceTypeAndConfidence_fieldAccessorTable
@@ -3808,6 +3862,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type result = org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -3846,6 +3901,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -3855,6 +3911,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -3866,6 +3923,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -3993,6 +4051,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4000,6 +4059,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4028,6 +4088,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceTypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceTypeAndConfidence_fieldAccessorTable
@@ -4050,6 +4111,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -4063,15 +4125,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceTypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence build() {
         org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -4080,6 +4145,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence buildPartial() {
         org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence result = new org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence(this);
         result.type_ = type_;
@@ -4092,32 +4158,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence) {
           return mergeFrom((org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence)other);
@@ -4140,10 +4213,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4193,6 +4268,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type result = org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -4378,11 +4454,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -4404,6 +4482,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<SurfaceTypeAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<SurfaceTypeAndConfidence>() {
+      @java.lang.Override
       public SurfaceTypeAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4421,6 +4500,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.objectdetection.StaticObject.SurfaceTypeAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -4555,13 +4635,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -4594,6 +4667,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4611,6 +4691,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceMaterialAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceMaterialAndConfidence_fieldAccessorTable
@@ -4858,6 +4939,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type result = org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -4941,6 +5023,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4950,6 +5033,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -4964,6 +5048,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -5104,6 +5189,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -5111,6 +5197,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -5139,6 +5226,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceMaterialAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceMaterialAndConfidence_fieldAccessorTable
@@ -5161,6 +5249,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -5180,15 +5269,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceMaterialAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence build() {
         org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -5197,6 +5289,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence buildPartial() {
         org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence result = new org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence(this);
         result.type_ = type_;
@@ -5214,32 +5307,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence) {
           return mergeFrom((org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence)other);
@@ -5265,10 +5365,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5318,6 +5420,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type result = org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -5692,11 +5795,13 @@ private static final long serialVersionUID = 0L;
         }
         return reflectivityAndAccuracyBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -5718,6 +5823,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<SurfaceMaterialAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<SurfaceMaterialAndConfidence>() {
+      @java.lang.Override
       public SurfaceMaterialAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5735,6 +5841,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.objectdetection.StaticObject.SurfaceMaterialAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -5831,13 +5938,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -5857,6 +5957,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -5874,6 +5981,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceColorAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceColorAndConfidence_fieldAccessorTable
@@ -6155,6 +6263,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type result = org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -6193,6 +6302,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -6202,6 +6312,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type.UNKOWN_TYPE.getNumber()) {
@@ -6213,6 +6324,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -6340,6 +6452,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -6347,6 +6460,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -6374,6 +6488,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceColorAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceColorAndConfidence_fieldAccessorTable
@@ -6396,6 +6511,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -6409,15 +6525,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_SurfaceColorAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence build() {
         org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -6426,6 +6545,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence buildPartial() {
         org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence result = new org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence(this);
         result.type_ = type_;
@@ -6438,32 +6558,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence) {
           return mergeFrom((org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence)other);
@@ -6486,10 +6613,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6539,6 +6668,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type result = org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -6724,11 +6854,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -6750,6 +6882,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<SurfaceColorAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<SurfaceColorAndConfidence>() {
+      @java.lang.Override
       public SurfaceColorAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -6767,6 +6900,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.objectdetection.StaticObject.SurfaceColorAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -7192,6 +7326,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -7201,6 +7336,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (envelope_ != null) {
@@ -7236,6 +7372,7 @@ private static final long serialVersionUID = 0L;
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -7479,6 +7616,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -7486,6 +7624,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(org.sensoris.categories.objectdetection.StaticObject prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -7522,6 +7661,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_fieldAccessorTable
@@ -7545,6 +7685,7 @@ private static final long serialVersionUID = 0L;
         getSurfaceColorAndConfidenceFieldBuilder();
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       if (envelopeBuilder_ == null) {
@@ -7600,15 +7741,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return org.sensoris.categories.objectdetection.SensorisObjectDetectionCategory.internal_static_sensoris_protobuf_categories_objectdetection_StaticObject_descriptor;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.objectdetection.StaticObject getDefaultInstanceForType() {
       return org.sensoris.categories.objectdetection.StaticObject.getDefaultInstance();
     }
 
+    @java.lang.Override
     public org.sensoris.categories.objectdetection.StaticObject build() {
       org.sensoris.categories.objectdetection.StaticObject result = buildPartial();
       if (!result.isInitialized()) {
@@ -7617,6 +7761,7 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.objectdetection.StaticObject buildPartial() {
       org.sensoris.categories.objectdetection.StaticObject result = new org.sensoris.categories.objectdetection.StaticObject(this);
       int from_bitField0_ = bitField0_;
@@ -7685,32 +7830,39 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
       return (Builder) super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return (Builder) super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return (Builder) super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
       return (Builder) super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof org.sensoris.categories.objectdetection.StaticObject) {
         return mergeFrom((org.sensoris.categories.objectdetection.StaticObject)other);
@@ -7787,10 +7939,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9605,11 +9759,13 @@ private static final long serialVersionUID = 0L;
       }
       return surfaceColorAndConfidenceBuilder_;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFieldsProto3(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -9631,6 +9787,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<StaticObject>
       PARSER = new com.google.protobuf.AbstractParser<StaticObject>() {
+    @java.lang.Override
     public StaticObject parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9648,6 +9805,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public org.sensoris.categories.objectdetection.StaticObject getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

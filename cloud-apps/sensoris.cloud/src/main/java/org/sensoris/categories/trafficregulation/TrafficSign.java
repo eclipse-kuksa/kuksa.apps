@@ -58,13 +58,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 10: {
             org.sensoris.types.base.EventEnvelope.Builder subBuilder = null;
             if (envelope_ != null) {
@@ -204,6 +197,13 @@ private static final long serialVersionUID = 0L;
                 input.readMessage(org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.parser(), extensionRegistry));
             break;
           }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -224,6 +224,7 @@ private static final long serialVersionUID = 0L;
     return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_fieldAccessorTable
@@ -321,13 +322,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -347,6 +341,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -364,6 +365,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ShapeAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ShapeAndConfidence_fieldAccessorTable
@@ -696,6 +698,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -734,6 +737,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -743,6 +747,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -754,6 +759,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -881,6 +887,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -888,6 +895,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -915,6 +923,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ShapeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ShapeAndConfidence_fieldAccessorTable
@@ -937,6 +946,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -950,15 +960,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ShapeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence build() {
         org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -967,6 +980,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence buildPartial() {
         org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence result = new org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence(this);
         result.type_ = type_;
@@ -979,32 +993,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence) {
           return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence)other);
@@ -1027,10 +1048,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1080,6 +1103,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -1265,11 +1289,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1291,6 +1317,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<ShapeAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<ShapeAndConfidence>() {
+      @java.lang.Override
       public ShapeAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1308,6 +1335,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign.ShapeAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1429,13 +1457,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -1468,6 +1489,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1485,6 +1513,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_TypeAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_TypeAndConfidence_fieldAccessorTable
@@ -6725,6 +6754,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -6796,6 +6826,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -6805,6 +6836,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -6819,6 +6851,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -6959,6 +6992,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -6966,6 +7000,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -6993,6 +7028,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_TypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_TypeAndConfidence_fieldAccessorTable
@@ -7015,6 +7051,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -7034,15 +7071,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_TypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence build() {
         org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -7051,6 +7091,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence buildPartial() {
         org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence result = new org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence(this);
         result.type_ = type_;
@@ -7068,32 +7109,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence) {
           return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence)other);
@@ -7119,10 +7167,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -7172,6 +7222,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -7510,11 +7561,13 @@ private static final long serialVersionUID = 0L;
         }
         return otherTextBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -7536,6 +7589,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<TypeAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<TypeAndConfidence>() {
+      @java.lang.Override
       public TypeAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -7553,6 +7607,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign.TypeAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -7659,13 +7714,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               com.google.protobuf.StringValue.Builder subBuilder = null;
               if (value_ != null) {
@@ -7692,6 +7740,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -7709,6 +7764,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValueAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValueAndConfidence_fieldAccessorTable
@@ -7786,6 +7842,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7795,6 +7852,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (value_ != null) {
@@ -7806,6 +7864,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -7939,6 +7998,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -7946,6 +8006,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -7973,6 +8034,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValueAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValueAndConfidence_fieldAccessorTable
@@ -7995,6 +8057,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (valueBuilder_ == null) {
@@ -8012,15 +8075,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValueAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence build() {
         org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -8029,6 +8095,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence buildPartial() {
         org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence result = new org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence(this);
         if (valueBuilder_ == null) {
@@ -8045,32 +8112,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence) {
           return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence)other);
@@ -8093,10 +8167,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8429,11 +8505,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -8455,6 +8533,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<ValueAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<ValueAndConfidence>() {
+      @java.lang.Override
       public ValueAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8472,6 +8551,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign.ValueAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -8568,13 +8648,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -8594,6 +8667,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -8611,6 +8691,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_PermanencyAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_PermanencyAndConfidence_fieldAccessorTable
@@ -8824,6 +8905,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -8862,6 +8944,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -8871,6 +8954,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -8882,6 +8966,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -9009,6 +9094,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -9016,6 +9102,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -9043,6 +9130,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_PermanencyAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_PermanencyAndConfidence_fieldAccessorTable
@@ -9065,6 +9153,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -9078,15 +9167,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_PermanencyAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence build() {
         org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -9095,6 +9187,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence buildPartial() {
         org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence result = new org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence(this);
         result.type_ = type_;
@@ -9107,32 +9200,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence) {
           return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence)other);
@@ -9155,10 +9255,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9208,6 +9310,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -9393,11 +9496,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -9419,6 +9524,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<PermanencyAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<PermanencyAndConfidence>() {
+      @java.lang.Override
       public PermanencyAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -9436,6 +9542,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign.PermanencyAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -9532,13 +9639,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -9558,6 +9658,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -9575,6 +9682,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValidationAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValidationAndConfidence_fieldAccessorTable
@@ -9737,6 +9845,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -9775,6 +9884,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -9784,6 +9894,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -9795,6 +9906,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -9922,6 +10034,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -9929,6 +10042,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -9956,6 +10070,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValidationAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValidationAndConfidence_fieldAccessorTable
@@ -9978,6 +10093,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -9991,15 +10107,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_ValidationAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence build() {
         org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -10008,6 +10127,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence buildPartial() {
         org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence result = new org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence(this);
         result.type_ = type_;
@@ -10020,32 +10140,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence) {
           return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence)other);
@@ -10068,10 +10195,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -10121,6 +10250,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -10306,11 +10436,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -10332,6 +10464,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<ValidationAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<ValidationAndConfidence>() {
+      @java.lang.Override
       public ValidationAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -10349,6 +10482,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign.ValidationAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -10445,13 +10579,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -10471,6 +10598,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -10488,6 +10622,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_DominantBackgroundColorAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_DominantBackgroundColorAndConfidence_fieldAccessorTable
@@ -10752,6 +10887,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -10790,6 +10926,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -10799,6 +10936,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -10810,6 +10948,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -10937,6 +11076,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -10944,6 +11084,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -10971,6 +11112,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_DominantBackgroundColorAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_DominantBackgroundColorAndConfidence_fieldAccessorTable
@@ -10993,6 +11135,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -11006,15 +11149,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_DominantBackgroundColorAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence build() {
         org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -11023,6 +11169,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence buildPartial() {
         org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence result = new org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence(this);
         result.type_ = type_;
@@ -11035,32 +11182,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence) {
           return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence)other);
@@ -11083,10 +11237,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -11136,6 +11292,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -11321,11 +11478,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -11347,6 +11506,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<DominantBackgroundColorAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<DominantBackgroundColorAndConfidence>() {
+      @java.lang.Override
       public DominantBackgroundColorAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -11364,6 +11524,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign.DominantBackgroundColorAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -11517,13 +11678,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               org.sensoris.types.base.Confidence.Builder subBuilder = null;
               if (existenceConfidence_ != null) {
@@ -11576,6 +11730,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -11593,6 +11754,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_fieldAccessorTable
@@ -11715,13 +11877,6 @@ private static final long serialVersionUID = 0L;
               case 0:
                 done = true;
                 break;
-              default: {
-                if (!parseUnknownFieldProto3(
-                    input, unknownFields, extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
               case 8: {
                 int rawValue = input.readEnum();
 
@@ -11754,6 +11909,13 @@ private static final long serialVersionUID = 0L;
 
                 break;
               }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -11771,6 +11933,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_TypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_TypeAndConfidence_fieldAccessorTable
@@ -13178,6 +13341,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -13249,6 +13413,7 @@ private static final long serialVersionUID = 0L;
       }
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -13258,6 +13423,7 @@ private static final long serialVersionUID = 0L;
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (type_ != org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -13272,6 +13438,7 @@ private static final long serialVersionUID = 0L;
         unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -13412,6 +13579,7 @@ private static final long serialVersionUID = 0L;
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -13419,6 +13587,7 @@ private static final long serialVersionUID = 0L;
       public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -13446,6 +13615,7 @@ private static final long serialVersionUID = 0L;
           return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_TypeAndConfidence_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_TypeAndConfidence_fieldAccessorTable
@@ -13468,6 +13638,7 @@ private static final long serialVersionUID = 0L;
                   .alwaysUseFieldBuilders) {
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           type_ = 0;
@@ -13487,15 +13658,18 @@ private static final long serialVersionUID = 0L;
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_TypeAndConfidence_descriptor;
         }
 
+        @java.lang.Override
         public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence getDefaultInstanceForType() {
           return org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.getDefaultInstance();
         }
 
+        @java.lang.Override
         public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence build() {
           org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence result = buildPartial();
           if (!result.isInitialized()) {
@@ -13504,6 +13678,7 @@ private static final long serialVersionUID = 0L;
           return result;
         }
 
+        @java.lang.Override
         public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence buildPartial() {
           org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence result = new org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence(this);
           result.type_ = type_;
@@ -13521,32 +13696,39 @@ private static final long serialVersionUID = 0L;
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence) {
             return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence)other);
@@ -13572,10 +13754,12 @@ private static final long serialVersionUID = 0L;
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -13625,6 +13809,7 @@ private static final long serialVersionUID = 0L;
          * <code>.sensoris.protobuf.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type type = 1;</code>
          */
         public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type getType() {
+          @SuppressWarnings("deprecation")
           org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type result = org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type.valueOf(type_);
           return result == null ? org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence.Type.UNRECOGNIZED : result;
         }
@@ -13963,11 +14148,13 @@ private static final long serialVersionUID = 0L;
           }
           return otherTextBuilder_;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.mergeUnknownFields(unknownFields);
@@ -13989,6 +14176,7 @@ private static final long serialVersionUID = 0L;
 
       private static final com.google.protobuf.Parser<TypeAndConfidence>
           PARSER = new com.google.protobuf.AbstractParser<TypeAndConfidence>() {
+        @java.lang.Override
         public TypeAndConfidence parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -14006,6 +14194,7 @@ private static final long serialVersionUID = 0L;
         return PARSER;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.TypeAndConfidence getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -14145,6 +14334,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -14154,6 +14344,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (existenceConfidence_ != null) {
@@ -14171,6 +14362,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -14330,6 +14522,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -14337,6 +14530,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -14364,6 +14558,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_fieldAccessorTable
@@ -14386,6 +14581,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (existenceConfidenceBuilder_ == null) {
@@ -14415,15 +14611,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_SupplementarySignAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence build() {
         org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -14432,6 +14631,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence buildPartial() {
         org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence result = new org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence(this);
         if (existenceConfidenceBuilder_ == null) {
@@ -14458,32 +14658,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence) {
           return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence)other);
@@ -14512,10 +14719,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -15145,11 +15354,13 @@ private static final long serialVersionUID = 0L;
         }
         return valueAndConfidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -15171,6 +15382,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<SupplementarySignAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<SupplementarySignAndConfidence>() {
+      @java.lang.Override
       public SupplementarySignAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -15188,6 +15400,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign.SupplementarySignAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -15581,6 +15794,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -15590,6 +15804,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (envelope_ != null) {
@@ -15628,6 +15843,7 @@ private static final long serialVersionUID = 0L;
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -15875,6 +16091,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -15882,6 +16099,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(org.sensoris.categories.trafficregulation.TrafficSign prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -15920,6 +16138,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_fieldAccessorTable
@@ -15943,6 +16162,7 @@ private static final long serialVersionUID = 0L;
         getSupplementarySignAndConfidenceFieldBuilder();
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       if (envelopeBuilder_ == null) {
@@ -16014,15 +16234,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return org.sensoris.categories.trafficregulation.SensorisTrafficRegulationCategory.internal_static_sensoris_protobuf_categories_trafficregulation_TrafficSign_descriptor;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign getDefaultInstanceForType() {
       return org.sensoris.categories.trafficregulation.TrafficSign.getDefaultInstance();
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign build() {
       org.sensoris.categories.trafficregulation.TrafficSign result = buildPartial();
       if (!result.isInitialized()) {
@@ -16031,6 +16254,7 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.trafficregulation.TrafficSign buildPartial() {
       org.sensoris.categories.trafficregulation.TrafficSign result = new org.sensoris.categories.trafficregulation.TrafficSign(this);
       int from_bitField0_ = bitField0_;
@@ -16099,32 +16323,39 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
       return (Builder) super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return (Builder) super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return (Builder) super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
       return (Builder) super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof org.sensoris.categories.trafficregulation.TrafficSign) {
         return mergeFrom((org.sensoris.categories.trafficregulation.TrafficSign)other);
@@ -16197,10 +16428,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -18061,11 +18294,13 @@ private static final long serialVersionUID = 0L;
       }
       return supplementarySignAndConfidenceBuilder_;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFieldsProto3(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -18087,6 +18322,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<TrafficSign>
       PARSER = new com.google.protobuf.AbstractParser<TrafficSign>() {
+    @java.lang.Override
     public TrafficSign parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -18104,6 +18340,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public org.sensoris.categories.trafficregulation.TrafficSign getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

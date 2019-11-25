@@ -46,13 +46,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 10: {
             org.sensoris.messages.data.EventGroup.Envelope.Builder subBuilder = null;
             if (envelope_ != null) {
@@ -222,6 +215,13 @@ private static final long serialVersionUID = 0L;
 
             break;
           }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -239,6 +239,7 @@ private static final long serialVersionUID = 0L;
     return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_fieldAccessorTable
@@ -363,13 +364,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 10: {
               org.sensoris.messages.data.EventGroup.Envelope.Origin.Builder subBuilder = null;
               if (origin_ != null) {
@@ -392,6 +386,13 @@ private static final long serialVersionUID = 0L;
                   input.readMessage(com.google.protobuf.Any.parser(), extensionRegistry));
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -412,6 +413,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_fieldAccessorTable
@@ -544,13 +546,6 @@ private static final long serialVersionUID = 0L;
               case 0:
                 done = true;
                 break;
-              default: {
-                if (!parseUnknownFieldProto3(
-                    input, unknownFields, extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
               case 10: {
                 org.sensoris.types.base.Timestamp.Builder subBuilder = null;
                 if (timestamp_ != null) {
@@ -590,6 +585,13 @@ private static final long serialVersionUID = 0L;
 
                 break;
               }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -607,6 +609,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_Origin_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_Origin_fieldAccessorTable
@@ -717,6 +720,7 @@ private static final long serialVersionUID = 0L;
       }
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -726,6 +730,7 @@ private static final long serialVersionUID = 0L;
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (timestamp_ != null) {
@@ -740,6 +745,7 @@ private static final long serialVersionUID = 0L;
         unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -886,6 +892,7 @@ private static final long serialVersionUID = 0L;
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -893,6 +900,7 @@ private static final long serialVersionUID = 0L;
       public static Builder newBuilder(org.sensoris.messages.data.EventGroup.Envelope.Origin prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -920,6 +928,7 @@ private static final long serialVersionUID = 0L;
           return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_Origin_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_Origin_fieldAccessorTable
@@ -942,6 +951,7 @@ private static final long serialVersionUID = 0L;
                   .alwaysUseFieldBuilders) {
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           if (timestampBuilder_ == null) {
@@ -965,15 +975,18 @@ private static final long serialVersionUID = 0L;
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_Origin_descriptor;
         }
 
+        @java.lang.Override
         public org.sensoris.messages.data.EventGroup.Envelope.Origin getDefaultInstanceForType() {
           return org.sensoris.messages.data.EventGroup.Envelope.Origin.getDefaultInstance();
         }
 
+        @java.lang.Override
         public org.sensoris.messages.data.EventGroup.Envelope.Origin build() {
           org.sensoris.messages.data.EventGroup.Envelope.Origin result = buildPartial();
           if (!result.isInitialized()) {
@@ -982,6 +995,7 @@ private static final long serialVersionUID = 0L;
           return result;
         }
 
+        @java.lang.Override
         public org.sensoris.messages.data.EventGroup.Envelope.Origin buildPartial() {
           org.sensoris.messages.data.EventGroup.Envelope.Origin result = new org.sensoris.messages.data.EventGroup.Envelope.Origin(this);
           if (timestampBuilder_ == null) {
@@ -1003,32 +1017,39 @@ private static final long serialVersionUID = 0L;
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof org.sensoris.messages.data.EventGroup.Envelope.Origin) {
             return mergeFrom((org.sensoris.messages.data.EventGroup.Envelope.Origin)other);
@@ -1054,10 +1075,12 @@ private static final long serialVersionUID = 0L;
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1543,11 +1566,13 @@ private static final long serialVersionUID = 0L;
           }
           return orientationAndAccuracyBuilder_;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.mergeUnknownFields(unknownFields);
@@ -1569,6 +1594,7 @@ private static final long serialVersionUID = 0L;
 
       private static final com.google.protobuf.Parser<Origin>
           PARSER = new com.google.protobuf.AbstractParser<Origin>() {
+        @java.lang.Override
         public Origin parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1586,6 +1612,7 @@ private static final long serialVersionUID = 0L;
         return PARSER;
       }
 
+      @java.lang.Override
       public org.sensoris.messages.data.EventGroup.Envelope.Origin getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -1682,6 +1709,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1691,6 +1719,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (origin_ != null) {
@@ -1702,6 +1731,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1832,6 +1862,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1839,6 +1870,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.messages.data.EventGroup.Envelope prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1866,6 +1898,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_fieldAccessorTable
@@ -1889,6 +1922,7 @@ private static final long serialVersionUID = 0L;
           getExtensionFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (originBuilder_ == null) {
@@ -1906,15 +1940,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_Envelope_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.messages.data.EventGroup.Envelope getDefaultInstanceForType() {
         return org.sensoris.messages.data.EventGroup.Envelope.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.messages.data.EventGroup.Envelope build() {
         org.sensoris.messages.data.EventGroup.Envelope result = buildPartial();
         if (!result.isInitialized()) {
@@ -1923,6 +1960,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.messages.data.EventGroup.Envelope buildPartial() {
         org.sensoris.messages.data.EventGroup.Envelope result = new org.sensoris.messages.data.EventGroup.Envelope(this);
         int from_bitField0_ = bitField0_;
@@ -1946,32 +1984,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.messages.data.EventGroup.Envelope) {
           return mergeFrom((org.sensoris.messages.data.EventGroup.Envelope)other);
@@ -2017,10 +2062,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2504,11 +2551,13 @@ private static final long serialVersionUID = 0L;
         }
         return extensionBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2530,6 +2579,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<Envelope>
         PARSER = new com.google.protobuf.AbstractParser<Envelope>() {
+      @java.lang.Override
       public Envelope parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2547,6 +2597,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.messages.data.EventGroup.Envelope getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2983,6 +3034,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -2992,6 +3044,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (envelope_ != null) {
@@ -3036,6 +3089,7 @@ private static final long serialVersionUID = 0L;
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -3312,6 +3366,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -3319,6 +3374,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(org.sensoris.messages.data.EventGroup prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -3346,6 +3402,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_fieldAccessorTable
@@ -3368,6 +3425,7 @@ private static final long serialVersionUID = 0L;
               .alwaysUseFieldBuilders) {
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       if (envelopeBuilder_ == null) {
@@ -3451,15 +3509,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return org.sensoris.messages.data.SensorisDataMessages.internal_static_sensoris_protobuf_messages_data_EventGroup_descriptor;
     }
 
+    @java.lang.Override
     public org.sensoris.messages.data.EventGroup getDefaultInstanceForType() {
       return org.sensoris.messages.data.EventGroup.getDefaultInstance();
     }
 
+    @java.lang.Override
     public org.sensoris.messages.data.EventGroup build() {
       org.sensoris.messages.data.EventGroup result = buildPartial();
       if (!result.isInitialized()) {
@@ -3468,6 +3529,7 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public org.sensoris.messages.data.EventGroup buildPartial() {
       org.sensoris.messages.data.EventGroup result = new org.sensoris.messages.data.EventGroup(this);
       if (envelopeBuilder_ == null) {
@@ -3539,32 +3601,39 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
       return (Builder) super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return (Builder) super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return (Builder) super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
       return (Builder) super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof org.sensoris.messages.data.EventGroup) {
         return mergeFrom((org.sensoris.messages.data.EventGroup)other);
@@ -3620,10 +3689,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5630,11 +5701,13 @@ private static final long serialVersionUID = 0L;
       }
       return mapCategoryBuilder_;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFieldsProto3(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -5656,6 +5729,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<EventGroup>
       PARSER = new com.google.protobuf.AbstractParser<EventGroup>() {
+    @java.lang.Override
     public EventGroup parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -5673,6 +5747,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public org.sensoris.messages.data.EventGroup getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }

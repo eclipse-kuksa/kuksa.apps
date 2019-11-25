@@ -53,13 +53,6 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          default: {
-            if (!parseUnknownFieldProto3(
-                input, unknownFields, extensionRegistry, tag)) {
-              done = true;
-            }
-            break;
-          }
           case 10: {
             org.sensoris.types.base.EventEnvelope.Builder subBuilder = null;
             if (envelope_ != null) {
@@ -238,6 +231,13 @@ private static final long serialVersionUID = 0L;
             markingsCase_ = 14;
             break;
           }
+          default: {
+            if (!parseUnknownFieldProto3(
+                input, unknownFields, extensionRegistry, tag)) {
+              done = true;
+            }
+            break;
+          }
         }
       }
     } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -255,6 +255,7 @@ private static final long serialVersionUID = 0L;
     return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_descriptor;
   }
 
+  @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
     return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_fieldAccessorTable
@@ -505,13 +506,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 8: {
               int rawValue = input.readEnum();
 
@@ -531,6 +525,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -548,6 +549,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_TypeAndConfidence_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_TypeAndConfidence_fieldAccessorTable
@@ -1203,6 +1205,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type type = 1;</code>
      */
     public org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type getType() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type result = org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type.valueOf(type_);
       return result == null ? org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type.UNRECOGNIZED : result;
     }
@@ -1241,6 +1244,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1250,6 +1254,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (type_ != org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type.UNKNOWN_TYPE.getNumber()) {
@@ -1261,6 +1266,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -1388,6 +1394,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -1395,6 +1402,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -1422,6 +1430,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_TypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_TypeAndConfidence_fieldAccessorTable
@@ -1444,6 +1453,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         type_ = 0;
@@ -1457,15 +1467,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_TypeAndConfidence_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence getDefaultInstanceForType() {
         return org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence build() {
         org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence result = buildPartial();
         if (!result.isInitialized()) {
@@ -1474,6 +1487,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence buildPartial() {
         org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence result = new org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence(this);
         result.type_ = type_;
@@ -1486,32 +1500,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence) {
           return mergeFrom((org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence)other);
@@ -1534,10 +1555,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1587,6 +1610,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type type = 1;</code>
        */
       public org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type result = org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence.Type.UNRECOGNIZED : result;
       }
@@ -1772,11 +1796,13 @@ private static final long serialVersionUID = 0L;
         }
         return confidenceBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -1798,6 +1824,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<TypeAndConfidence>
         PARSER = new com.google.protobuf.AbstractParser<TypeAndConfidence>() {
+      @java.lang.Override
       public TypeAndConfidence parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1815,6 +1842,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.roadattribution.LaneBoundary.TypeAndConfidence getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -1937,13 +1965,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 18: {
               org.sensoris.types.base.Int64ValueAndAccuracy.Builder subBuilder = null;
               if (lengthAndAccuracy_ != null) {
@@ -1970,6 +1991,13 @@ private static final long serialVersionUID = 0L;
 
               break;
             }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -1987,6 +2015,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_DashStatistics_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_DashStatistics_fieldAccessorTable
@@ -2079,6 +2108,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2088,6 +2118,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (lengthAndAccuracy_ != null) {
@@ -2099,6 +2130,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -2232,6 +2264,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -2239,6 +2272,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -2267,6 +2301,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_DashStatistics_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_DashStatistics_fieldAccessorTable
@@ -2289,6 +2324,7 @@ private static final long serialVersionUID = 0L;
                 .alwaysUseFieldBuilders) {
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (lengthAndAccuracyBuilder_ == null) {
@@ -2306,15 +2342,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_DashStatistics_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics getDefaultInstanceForType() {
         return org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics build() {
         org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics result = buildPartial();
         if (!result.isInitialized()) {
@@ -2323,6 +2362,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics buildPartial() {
         org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics result = new org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics(this);
         if (lengthAndAccuracyBuilder_ == null) {
@@ -2339,32 +2379,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics) {
           return mergeFrom((org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics)other);
@@ -2387,10 +2434,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2768,11 +2817,13 @@ private static final long serialVersionUID = 0L;
         }
         return distanceAndAccuracyBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -2794,6 +2845,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<DashStatistics>
         PARSER = new com.google.protobuf.AbstractParser<DashStatistics>() {
+      @java.lang.Override
       public DashStatistics parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2811,6 +2863,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.roadattribution.LaneBoundary.DashStatistics getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -2911,13 +2964,6 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
             case 18: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
                 typeAndOffset_ = new java.util.ArrayList<org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset>();
@@ -2925,6 +2971,13 @@ private static final long serialVersionUID = 0L;
               }
               typeAndOffset_.add(
                   input.readMessage(org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
               break;
             }
           }
@@ -2947,6 +3000,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_fieldAccessorTable
@@ -3053,13 +3107,6 @@ private static final long serialVersionUID = 0L;
               case 0:
                 done = true;
                 break;
-              default: {
-                if (!parseUnknownFieldProto3(
-                    input, unknownFields, extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
               case 8: {
                 int rawValue = input.readEnum();
 
@@ -3079,6 +3126,13 @@ private static final long serialVersionUID = 0L;
 
                 break;
               }
+              default: {
+                if (!parseUnknownFieldProto3(
+                    input, unknownFields, extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
             }
           }
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -3096,6 +3150,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_TypeAndOffset_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_TypeAndOffset_fieldAccessorTable
@@ -3292,6 +3347,7 @@ private static final long serialVersionUID = 0L;
        * <code>.sensoris.protobuf.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type type = 1;</code>
        */
       public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type getType() {
+        @SuppressWarnings("deprecation")
         org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type result = org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type.valueOf(type_);
         return result == null ? org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type.UNRECOGNIZED : result;
       }
@@ -3339,6 +3395,7 @@ private static final long serialVersionUID = 0L;
       }
 
       private byte memoizedIsInitialized = -1;
+      @java.lang.Override
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized == 1) return true;
@@ -3348,6 +3405,7 @@ private static final long serialVersionUID = 0L;
         return true;
       }
 
+      @java.lang.Override
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         if (type_ != org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type.UNKNOWN_TYPE.getNumber()) {
@@ -3359,6 +3417,7 @@ private static final long serialVersionUID = 0L;
         unknownFields.writeTo(output);
       }
 
+      @java.lang.Override
       public int getSerializedSize() {
         int size = memoizedSize;
         if (size != -1) return size;
@@ -3486,6 +3545,7 @@ private static final long serialVersionUID = 0L;
             .parseWithIOException(PARSER, input, extensionRegistry);
       }
 
+      @java.lang.Override
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder() {
         return DEFAULT_INSTANCE.toBuilder();
@@ -3493,6 +3553,7 @@ private static final long serialVersionUID = 0L;
       public static Builder newBuilder(org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset prototype) {
         return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
       }
+      @java.lang.Override
       public Builder toBuilder() {
         return this == DEFAULT_INSTANCE
             ? new Builder() : new Builder().mergeFrom(this);
@@ -3520,6 +3581,7 @@ private static final long serialVersionUID = 0L;
           return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_TypeAndOffset_descriptor;
         }
 
+        @java.lang.Override
         protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
             internalGetFieldAccessorTable() {
           return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_TypeAndOffset_fieldAccessorTable
@@ -3542,6 +3604,7 @@ private static final long serialVersionUID = 0L;
                   .alwaysUseFieldBuilders) {
           }
         }
+        @java.lang.Override
         public Builder clear() {
           super.clear();
           type_ = 0;
@@ -3555,15 +3618,18 @@ private static final long serialVersionUID = 0L;
           return this;
         }
 
+        @java.lang.Override
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
           return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_TypeAndOffset_descriptor;
         }
 
+        @java.lang.Override
         public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset getDefaultInstanceForType() {
           return org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.getDefaultInstance();
         }
 
+        @java.lang.Override
         public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset build() {
           org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset result = buildPartial();
           if (!result.isInitialized()) {
@@ -3572,6 +3638,7 @@ private static final long serialVersionUID = 0L;
           return result;
         }
 
+        @java.lang.Override
         public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset buildPartial() {
           org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset result = new org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset(this);
           result.type_ = type_;
@@ -3584,32 +3651,39 @@ private static final long serialVersionUID = 0L;
           return result;
         }
 
+        @java.lang.Override
         public Builder clone() {
           return (Builder) super.clone();
         }
+        @java.lang.Override
         public Builder setField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.setField(field, value);
         }
+        @java.lang.Override
         public Builder clearField(
             com.google.protobuf.Descriptors.FieldDescriptor field) {
           return (Builder) super.clearField(field);
         }
+        @java.lang.Override
         public Builder clearOneof(
             com.google.protobuf.Descriptors.OneofDescriptor oneof) {
           return (Builder) super.clearOneof(oneof);
         }
+        @java.lang.Override
         public Builder setRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             int index, java.lang.Object value) {
           return (Builder) super.setRepeatedField(field, index, value);
         }
+        @java.lang.Override
         public Builder addRepeatedField(
             com.google.protobuf.Descriptors.FieldDescriptor field,
             java.lang.Object value) {
           return (Builder) super.addRepeatedField(field, value);
         }
+        @java.lang.Override
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset) {
             return mergeFrom((org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset)other);
@@ -3632,10 +3706,12 @@ private static final long serialVersionUID = 0L;
           return this;
         }
 
+        @java.lang.Override
         public final boolean isInitialized() {
           return true;
         }
 
+        @java.lang.Override
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3685,6 +3761,7 @@ private static final long serialVersionUID = 0L;
          * <code>.sensoris.protobuf.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type type = 1;</code>
          */
         public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type getType() {
+          @SuppressWarnings("deprecation")
           org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type result = org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type.valueOf(type_);
           return result == null ? org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset.Type.UNRECOGNIZED : result;
         }
@@ -3897,11 +3974,13 @@ private static final long serialVersionUID = 0L;
           }
           return offsetAndAccuracyBuilder_;
         }
+        @java.lang.Override
         public final Builder setUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.setUnknownFieldsProto3(unknownFields);
         }
 
+        @java.lang.Override
         public final Builder mergeUnknownFields(
             final com.google.protobuf.UnknownFieldSet unknownFields) {
           return super.mergeUnknownFields(unknownFields);
@@ -3923,6 +4002,7 @@ private static final long serialVersionUID = 0L;
 
       private static final com.google.protobuf.Parser<TypeAndOffset>
           PARSER = new com.google.protobuf.AbstractParser<TypeAndOffset>() {
+        @java.lang.Override
         public TypeAndOffset parsePartialFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -3940,6 +4020,7 @@ private static final long serialVersionUID = 0L;
         return PARSER;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.TypeAndOffset getDefaultInstanceForType() {
         return DEFAULT_INSTANCE;
       }
@@ -4002,6 +4083,7 @@ private static final long serialVersionUID = 0L;
     }
 
     private byte memoizedIsInitialized = -1;
+    @java.lang.Override
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4011,6 +4093,7 @@ private static final long serialVersionUID = 0L;
       return true;
     }
 
+    @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       for (int i = 0; i < typeAndOffset_.size(); i++) {
@@ -4019,6 +4102,7 @@ private static final long serialVersionUID = 0L;
       unknownFields.writeTo(output);
     }
 
+    @java.lang.Override
     public int getSerializedSize() {
       int size = memoizedSize;
       if (size != -1) return size;
@@ -4136,6 +4220,7 @@ private static final long serialVersionUID = 0L;
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
 
+    @java.lang.Override
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
@@ -4143,6 +4228,7 @@ private static final long serialVersionUID = 0L;
     public static Builder newBuilder(org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
+    @java.lang.Override
     public Builder toBuilder() {
       return this == DEFAULT_INSTANCE
           ? new Builder() : new Builder().mergeFrom(this);
@@ -4172,6 +4258,7 @@ private static final long serialVersionUID = 0L;
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_descriptor;
       }
 
+      @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_fieldAccessorTable
@@ -4195,6 +4282,7 @@ private static final long serialVersionUID = 0L;
           getTypeAndOffsetFieldBuilder();
         }
       }
+      @java.lang.Override
       public Builder clear() {
         super.clear();
         if (typeAndOffsetBuilder_ == null) {
@@ -4206,15 +4294,18 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
         return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_MarkingOffsets_descriptor;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets getDefaultInstanceForType() {
         return org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets.getDefaultInstance();
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets build() {
         org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets result = buildPartial();
         if (!result.isInitialized()) {
@@ -4223,6 +4314,7 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets buildPartial() {
         org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets result = new org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets(this);
         int from_bitField0_ = bitField0_;
@@ -4239,32 +4331,39 @@ private static final long serialVersionUID = 0L;
         return result;
       }
 
+      @java.lang.Override
       public Builder clone() {
         return (Builder) super.clone();
       }
+      @java.lang.Override
       public Builder setField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.setField(field, value);
       }
+      @java.lang.Override
       public Builder clearField(
           com.google.protobuf.Descriptors.FieldDescriptor field) {
         return (Builder) super.clearField(field);
       }
+      @java.lang.Override
       public Builder clearOneof(
           com.google.protobuf.Descriptors.OneofDescriptor oneof) {
         return (Builder) super.clearOneof(oneof);
       }
+      @java.lang.Override
       public Builder setRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           int index, java.lang.Object value) {
         return (Builder) super.setRepeatedField(field, index, value);
       }
+      @java.lang.Override
       public Builder addRepeatedField(
           com.google.protobuf.Descriptors.FieldDescriptor field,
           java.lang.Object value) {
         return (Builder) super.addRepeatedField(field, value);
       }
+      @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets) {
           return mergeFrom((org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets)other);
@@ -4307,10 +4406,12 @@ private static final long serialVersionUID = 0L;
         return this;
       }
 
+      @java.lang.Override
       public final boolean isInitialized() {
         return true;
       }
 
+      @java.lang.Override
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4641,11 +4742,13 @@ private static final long serialVersionUID = 0L;
         }
         return typeAndOffsetBuilder_;
       }
+      @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
       }
 
+      @java.lang.Override
       public final Builder mergeUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.mergeUnknownFields(unknownFields);
@@ -4667,6 +4770,7 @@ private static final long serialVersionUID = 0L;
 
     private static final com.google.protobuf.Parser<MarkingOffsets>
         PARSER = new com.google.protobuf.AbstractParser<MarkingOffsets>() {
+      @java.lang.Override
       public MarkingOffsets parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -4684,6 +4788,7 @@ private static final long serialVersionUID = 0L;
       return PARSER;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.roadattribution.LaneBoundary.MarkingOffsets getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
@@ -5029,6 +5134,7 @@ private static final long serialVersionUID = 0L;
    * <code>.sensoris.protobuf.categories.roadattribution.LaneBoundary.PositionReference position_reference = 8;</code>
    */
   public org.sensoris.categories.roadattribution.LaneBoundary.PositionReference getPositionReference() {
+    @SuppressWarnings("deprecation")
     org.sensoris.categories.roadattribution.LaneBoundary.PositionReference result = org.sensoris.categories.roadattribution.LaneBoundary.PositionReference.valueOf(positionReference_);
     return result == null ? org.sensoris.categories.roadattribution.LaneBoundary.PositionReference.UNRECOGNIZED : result;
   }
@@ -5283,6 +5389,7 @@ private static final long serialVersionUID = 0L;
   }
 
   private byte memoizedIsInitialized = -1;
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -5292,6 +5399,7 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (envelope_ != null) {
@@ -5339,6 +5447,7 @@ private static final long serialVersionUID = 0L;
     unknownFields.writeTo(output);
   }
 
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -5641,6 +5750,7 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
@@ -5648,6 +5758,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder(org.sensoris.categories.roadattribution.LaneBoundary prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
@@ -5681,6 +5792,7 @@ private static final long serialVersionUID = 0L;
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_descriptor;
     }
 
+    @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_fieldAccessorTable
@@ -5703,6 +5815,7 @@ private static final long serialVersionUID = 0L;
               .alwaysUseFieldBuilders) {
       }
     }
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       if (envelopeBuilder_ == null) {
@@ -5774,15 +5887,18 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
       return org.sensoris.categories.roadattribution.SensorisRoadAttributionCategory.internal_static_sensoris_protobuf_categories_roadattribution_LaneBoundary_descriptor;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.roadattribution.LaneBoundary getDefaultInstanceForType() {
       return org.sensoris.categories.roadattribution.LaneBoundary.getDefaultInstance();
     }
 
+    @java.lang.Override
     public org.sensoris.categories.roadattribution.LaneBoundary build() {
       org.sensoris.categories.roadattribution.LaneBoundary result = buildPartial();
       if (!result.isInitialized()) {
@@ -5791,6 +5907,7 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public org.sensoris.categories.roadattribution.LaneBoundary buildPartial() {
       org.sensoris.categories.roadattribution.LaneBoundary result = new org.sensoris.categories.roadattribution.LaneBoundary(this);
       if (envelopeBuilder_ == null) {
@@ -5871,32 +5988,39 @@ private static final long serialVersionUID = 0L;
       return result;
     }
 
+    @java.lang.Override
     public Builder clone() {
       return (Builder) super.clone();
     }
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.setField(field, value);
     }
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
       return (Builder) super.clearField(field);
     }
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
       return (Builder) super.clearOneof(oneof);
     }
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         int index, java.lang.Object value) {
       return (Builder) super.setRepeatedField(field, index, value);
     }
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
         java.lang.Object value) {
       return (Builder) super.addRepeatedField(field, value);
     }
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
       if (other instanceof org.sensoris.categories.roadattribution.LaneBoundary) {
         return mergeFrom((org.sensoris.categories.roadattribution.LaneBoundary)other);
@@ -5968,10 +6092,12 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -7161,6 +7287,7 @@ private static final long serialVersionUID = 0L;
      * <code>.sensoris.protobuf.categories.roadattribution.LaneBoundary.PositionReference position_reference = 8;</code>
      */
     public org.sensoris.categories.roadattribution.LaneBoundary.PositionReference getPositionReference() {
+      @SuppressWarnings("deprecation")
       org.sensoris.categories.roadattribution.LaneBoundary.PositionReference result = org.sensoris.categories.roadattribution.LaneBoundary.PositionReference.valueOf(positionReference_);
       return result == null ? org.sensoris.categories.roadattribution.LaneBoundary.PositionReference.UNRECOGNIZED : result;
     }
@@ -8278,11 +8405,13 @@ private static final long serialVersionUID = 0L;
       onChanged();;
       return markingOffsetsBuilder_;
     }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.setUnknownFieldsProto3(unknownFields);
     }
 
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -8304,6 +8433,7 @@ private static final long serialVersionUID = 0L;
 
   private static final com.google.protobuf.Parser<LaneBoundary>
       PARSER = new com.google.protobuf.AbstractParser<LaneBoundary>() {
+    @java.lang.Override
     public LaneBoundary parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -8321,6 +8451,7 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
+  @java.lang.Override
   public org.sensoris.categories.roadattribution.LaneBoundary getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
