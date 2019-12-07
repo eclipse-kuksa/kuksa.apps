@@ -14,7 +14,11 @@
 #include "honoMqtt.hpp"
 
 using namespace std;
+using namespace std::chrono;
 
+#define QOS 1
+
+const string PUB_TOPIC = "telemetry";
 
 /**
  * A base action listener for pub.
@@ -51,42 +55,42 @@ protected:
 };
 
 
-void HonoMqtt::connect (string honoAddr , string clientID, string userName, string password) {
-
-   p_Client = new mqtt::async_client (honoAddr, clientID);
+void HonoMqtt::connect (string honoAddr , string clientID, string userName, string password, int  offlineBufferSize , int connAlive) {
+   
+   cout << "Creating async mqtt client with persist of max msg = "<< offlineBufferSize << endl;
+   p_Client = new mqtt::async_client (honoAddr, clientID, offlineBufferSize, nullptr);
    p_Client->set_callback(*this);
    mqtt::connect_options connOpts;
-   connOpts.set_connection_timeout(3);
-   connOpts.set_keep_alive_interval(20);
-   connOpts.set_automatic_reconnect(true);
+   connOpts.set_keep_alive_interval(seconds(connAlive)); // keep alive for seconds passed
    connOpts.set_clean_session(true);
    connOpts.set_user_name(userName);
    connOpts.set_password(password);
+   connOpts.set_automatic_reconnect(true);  // reconnects automatically.
+   top = new mqtt::topic(*p_Client, PUB_TOPIC, QOS, false);
 
    try {
          cout << "Connecting..." << endl;
-         mqtt::token_ptr conntok = p_Client->connect(connOpts, nullptr, *this);
-	 cout << "Waiting for the connection..." << endl;
-	 conntok->wait();
+	 p_Client->connect(connOpts)->wait();
          cout << "Connected." << endl;
    } catch (const mqtt::exception& exc) {
+                cout << "Exception occured while connecting to hono"<< endl;
 		cerr << exc.what() << endl;
 		throw exc;
    }
 }
  
-void HonoMqtt::publish (string topic, string data) {
+void HonoMqtt::publish (string data) {
+    try {
     cout << "Sending next message..." << endl;
     action_listener_pub listener;
-    mqtt::message_ptr pubmsg = mqtt::make_message(topic, data);
-    mqtt::delivery_token_ptr pubtok;
-    try {
-      pubtok = p_Client->publish(pubmsg, nullptr, listener);
-      pubtok->wait();
-      cout << "Published." << endl;
+    top->publish(std::move(data));
+    cout << "Published." << endl;
     } catch (const mqtt::exception& exc) {
+      cout << "Exception occured while publishing data"<< endl;
       cerr << exc.what() << endl;
-    }
+      throw exc;
+   }
+    
 }
 
 void HonoMqtt::disconnect() {

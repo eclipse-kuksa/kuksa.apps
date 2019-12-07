@@ -30,11 +30,12 @@ private:
     
     mqtt::async_client* p_Client;
     void(*onMsg)(string);
+    mqtt::topic* top;
 
 public:
    
-   void connect (string honoAddr , string clientID, string userName, string password);
-   void publish (string topic, string data);
+   void connect (string honoAddr , string clientID, string userName, string password, int  offlineBufferSize, int connAlive);
+   void publish (string data);
    void disconnect();
    void setMessageCB(void(*)(string));
 

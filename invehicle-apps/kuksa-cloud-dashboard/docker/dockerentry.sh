@@ -11,5 +11,6 @@
 #
 # Contributors: Robert Bosch GmbH
 
-./dashboard $HONOIP $HONOPORT $HONOPW $HONODEVICE $TOKEN $EMAIL_SERVER $EMAIL_PORT
+apk update && apk add curl
+./dashboard $HONOIP $HONOPORT $HONODEVICE $HONOPW $BUFFER_SIZE $BUFFER_TIME $TOKEN $EMAIL_SERVER $EMAIL_PORT
 
