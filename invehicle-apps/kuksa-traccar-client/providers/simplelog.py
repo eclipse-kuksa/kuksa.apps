@@ -20,71 +20,66 @@ import csv
 import time
 import threading
 
+class Provider():
+    def __init__(self, config):
 
-position = { "valid":False, "lat":"0", "lon":"0", "alt":"0", "hdop":"0", "speed":"0" }
-
-simplelog_interval=1
-lock=threading.Lock()
-RUNNING=True
-
-def loop(csv_reader):
-    global RUNNING,simplelog_interval,lock
-    for line in csv_reader:
-        time.sleep(simplelog_interval)
-
-        if RUNNING == False:
-            return
-
-        if not len(line) == 2:
-            print("Simplelog skipping invalid line "+str(line))
-            continue
-
-        try:
-            lat=float(line[0])
-            lon=float(line[1])
-        except ValueError:
-            print("Simplelog skipping invalid line "+str(line))
-            continue
-
-        lock.acquire()
-        position["lat"]=float(line[0])
-        position["lon"]=float(line[1])
-        position["valid"]=True
-        lock.release()
-   
-        print("Line is "+str(line))
+        print("Init simplelog provider...")
+        if "Provider.simplelog" not in config:
+            print("Provider.simplelog section missing from configuration, exiting")
+            sys.exit(-1)
         
-    print("Simplelog: FINISHED")
+        provider_config=config['Provider.simplelog']
+        simplelog_file=provider_config.get('file','log.csv')
+        self.simplelog_interval=provider_config.getint('interval',1)
 
-def initProvider(config):
-    global simplelog_interval
-    print("Init simplelog provider...")
-    if "Provider.simplelog" not in config:
-        print("Provider.simplelog section missing from configuration, exiting")
-        sys.exit(-1)
-    
-    provider_config=config['Provider.simplelog']
-    simplelog_file=provider_config.get('file','log.csv')
-    simplelog_interval=provider_config.getint('interval',1)
+        print("Trying to read simeplelog from "+str(simplelog_file)+" with a position every  "+str(self.simplelog_interval)+" s")
 
-    print("Trying to read simeplelog from "+str(simplelog_file)+" with a position every  "+str(simplelog_interval)+" s")
+        csv_f=open(simplelog_file)
+        csv_reader=csv.reader(csv_f, delimiter=',')
+        
+        self.position = { "valid":False, "lat":"0", "lon":"0", "alt":"0", "hdop":"0", "speed":"0" }
 
-    csv_f=open(simplelog_file)
-    csv_reader=csv.reader(csv_f, delimiter=',')
-    
-    #loop(csv_reader)
-    t = threading.Thread(target=loop, args=(csv_reader,))
-    t.start()
-    return t
+        self.lock=threading.Lock()
+        self.running=True
+        #loop(csv_reader)
+        t = threading.Thread(target=self.loop, args=(csv_reader,))
+        t.start()
 
-def shutdown():
-	global RUNNING
-	RUNNING=False
+    def loop(self, csv_reader):
+        for line in csv_reader:
+            time.sleep(self.simplelog_interval)
+
+            if self.running == False:
+                return
+
+            if not len(line) == 2:
+                print("Simplelog skipping invalid line "+str(line))
+                continue
+
+            try:
+                lat=float(line[0])
+                lon=float(line[1])
+            except ValueError:
+                print("Simplelog skipping invalid line "+str(line))
+                continue
+
+            self.lock.acquire()
+            self.position["lat"]=float(line[0])
+            self.position["lon"]=float(line[1])
+            self.position["valid"]=True
+            self.lock.release()
+       
+            print("Line is "+str(line))
+            
+        print("Simplelog: FINISHED")
 
 
-def getPosition():
-    global position, lock
-    lock.acquire()
-    p=position
-    lock.release()
-    return p
+    def shutdown(self):
+            self.running=False
+
+
+    def getPosition(self):
+        self.lock.acquire()
+        p=self.position
+        self.lock.release()
+        return p
