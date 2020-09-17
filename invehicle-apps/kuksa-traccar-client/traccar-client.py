@@ -33,16 +33,16 @@ config_candidates=['traccar-client.ini', '/etc/traccar-client.ini']
 RUNNING=True
 
 def terminationSignalreceived(signalNumber, frame):
-	global RUNNING
-	print("Received termination signal. Shutting down")
-	RUNNING=False
-	PROVIDER.shutdown()
+    global RUNNING
+    print("Received termination signal. Shutting down")
+    RUNNING=False
+    PROVIDER.shutdown()
 
 
 def instantiateProvider(provider, config):
-    mod=importlib.import_module("providers."+provider)
-    mod.initProvider(config)
-    return mod
+    module=importlib.import_module("providers."+provider)
+    providerClass = getattr(module, "Provider")
+    return providerClass(config)
     
 
 def main(args):
@@ -68,7 +68,7 @@ def main(args):
         sys.exit(-1)
 
     traccar_cfg = config['Traccar']
-    traccar_server              = traccar_cfg.get('server','http://localhost:8080')
+    traccar_server = traccar_cfg.get('server','http://localhost:8080')
     traccar_identifier = traccar_cfg.get('identifer','000000')
     traccar_publishing_interval = traccar_cfg.getint('interval',30)
 
