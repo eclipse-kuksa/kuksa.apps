@@ -108,7 +108,8 @@ class GPSD_Client():
         print("gpsd receive loop started")
         data_stream = gps3.DataStream()
         gpsd_socket.watch()
-        for new_data in gpsd_socket:
+        while self.running:
+            new_data = gpsd_socket.next(timeout = 2.0)
             if new_data:
                 if self.running == False:
                     return
@@ -122,7 +123,11 @@ class GPSD_Client():
                     self.position['hdop']=data_stream.SKY['hdop']
 
                 self.consumer.setPosition(self.position)
-                time.sleep(0.1)
+            else:
+                print ("no new data received!")
+
+            # socket is an non blocking socket, therefore timeout does not work
+            time.sleep(0.1)
 
 
     def shutdown(self):

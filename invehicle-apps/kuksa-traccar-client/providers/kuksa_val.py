@@ -56,7 +56,7 @@ class Provider():
         self.client.stopComm()
 
     def getValue(self, data, path):
-        if str(data[path]).isnumeric():
+        if isinstance(data[path], float) or data[path].isnumeric():
             return data[path]
         return 0
 
