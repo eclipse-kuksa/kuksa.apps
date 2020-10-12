@@ -67,6 +67,7 @@ class Provider():
     
         position = { "valid": False }
         resp = json.loads(resp)
+        print(resp)
 
         try:
             data = resp['value']
@@ -74,10 +75,13 @@ class Provider():
                 "alt": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Altitude'],
                 "lat": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude'],
                 "lon": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude'],
-                "hdop": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Accuracy'],
+                "hdop": 0, #data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Accuracy'],
                 "speed": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Speed']}
         except TypeError as e:
             print("type error: " + str(e))
+            pass
+        except KeyError as e:
+            print("key error: " + str(e))
             pass
         except :
             print("Unexpected error:", sys.exc_info()[0])
