@@ -93,7 +93,7 @@ def main(args):
         pos=PROVIDER.getPosition()
         print("Current pos "+str(pos))
         if pos['valid']:
-            request="id={}&lat={}&lon={}&timestamp={}&hdop={}&altitude={}&speed={}".format(traccar_identifier,pos['lat'],pos['lon'],datetime.now(),pos['hdop'],pos['alt'],pos['speed'])
+            request="id={}&lat={}&lon={}&hdop={}&altitude={}&speed={}&timestamp={}".format(traccar_identifier,pos['lat'],pos['lon'],pos['hdop'],pos['alt'],pos['speed'],datetime.now())
 
             url=traccar_server+"/?"+request
             print("Will GET "+str(url))
