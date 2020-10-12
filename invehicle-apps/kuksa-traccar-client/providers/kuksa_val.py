@@ -55,6 +55,12 @@ class Provider():
     def shutdown(self):
         self.client.stopComm()
 
+    def getValue(self, data, path):
+        if str(data[path]).isnumeric():
+            return data[path]
+        return 0
+
+
     def getPosition(self):
         req = {}
         req["requestId"] = 1234
@@ -72,11 +78,11 @@ class Provider():
         try:
             data = resp['value']
             position = { "valid":True, 
-                "alt": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Altitude'],
-                "lat": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude'],
-                "lon": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude'],
-                "hdop": 0, #data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Accuracy'],
-                "speed": data['Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Speed']}
+                "alt": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Altitude'),
+                "lat": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude'),
+                "lon": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude'),
+                "hdop": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Accuracy'),
+                "speed": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Speed')}
         except TypeError as e:
             print("type error: " + str(e))
             pass
@@ -84,7 +90,7 @@ class Provider():
             print("key error: " + str(e))
             pass
         except :
-            print("Unexpected error:", sys.exc_info()[0])
+            print("Unexpected error:", sys.exc_info())
             
         
         return position
