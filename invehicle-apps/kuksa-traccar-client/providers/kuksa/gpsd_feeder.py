@@ -24,6 +24,7 @@ import time
 import threading, queue, ssl
 import asyncio, websockets, pathlib
 from clientComm import VSSClientComm
+import gps
 
 class Kuksa_Client():
 
@@ -52,16 +53,16 @@ class Kuksa_Client():
         req["tokens"] = self.token
         jsonDump = json.dumps(req)
         self.sendMsgQueue.put(jsonDump)
-        print(req)
+        #print(req)
         resp = self.recvMsgQueue.get(timeout = 1)
-        print(resp)
+        #print(resp)
 
     def shutdown(self):
         self.client.stopComm()
 
     def setValue(self, path, value):
-        if 'n/a' == value:
-            print(path + "has an invalid value")
+        if 'nan' == value:
+            print(path + " has an invalid value " + str(value))
             return
         req = {}
         req["requestId"] = 1235
@@ -69,10 +70,10 @@ class Kuksa_Client():
         req["path"] = path
         req["value"] = value
         jsonDump = json.dumps(req)
-        print(jsonDump)
+        #print(jsonDump)
         self.sendMsgQueue.put(jsonDump)
         resp = self.recvMsgQueue.get(timeout = 1)
-        print(resp)
+        #print(resp)
         
     def setPosition(self, position):
         self.setValue('Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Altitude', position['alt'])
@@ -93,41 +94,39 @@ class GPSD_Client():
         gpsd_host=provider_config.get('host','127.0.0.1')
         gpsd_port=provider_config.get('port','2947')
 
+        gpsd = gps.gps(host = gpsd_host, port = gpsd_port, mode=gps.WATCH_ENABLE|gps.WATCH_NEWSTYLE) 
         print("Trying to connect gpsd at "+str(gpsd_host)+" port "+str(gpsd_port))
 
 
-        gpsd_socket = gps3.GPSDSocket()
-        gpsd_socket.connect(gpsd_host, gpsd_port)  #TODO: Find out when it fails
         self.position = {"lat":"0", "lon":"0", "alt":"0", "hdop":"0", "speed":"0" }
         self.running = True
 
-        self.thread = threading.Thread(target=self.loop, args=(gpsd_socket,))
+        self.thread = threading.Thread(target=self.loop, args=(gpsd,))
         self.thread.start()
 
-    def loop(self, gpsd_socket):
+    def loop(self, gpsd):
         print("gpsd receive loop started")
-        data_stream = gps3.DataStream()
-        gpsd_socket.watch()
         while self.running:
-            new_data = gpsd_socket.next(timeout = 2.0)
-            if new_data:
-                if self.running == False:
-                    return
-                data_stream.unpack(new_data)
+            try:
+                report = gpsd.next()
+                if report['class'] == 'TPV':
 
-                self.position['lat']=data_stream.TPV['lat']
-                self.position['lon']=data_stream.TPV['lon']            
-                self.position['alt']=data_stream.TPV['alt']
-                self.position['speed']=data_stream.TPV['speed']
-                if "hdop" in data_stream.SKY:
-                    self.position['hdop']=data_stream.SKY['hdop']
+                    self.position['lat']= getattr(report,'lat',0.0)
+                    self.position['lon']= getattr(report,'lon',0.0)
+                    self.position['alt']= getattr(report,'alt', 'nan')
+                    self.position['speed']= getattr(report,'speed',0.0)
+                    print(getattr(report,'time', "-"))
+                    print(self.position)
+                
+            except Exception as e:
+                print("Get exceptions: ")
+                print(e)
+                self.shutdown()
+                return
 
-                self.consumer.setPosition(self.position)
-            else:
-                print ("no new data received!")
-
-            # socket is an non blocking socket, therefore timeout does not work
-            time.sleep(0.1)
+            self.consumer.setPosition(self.position)
+     
+            time.sleep(1) 
 
 
     def shutdown(self):
@@ -135,7 +134,6 @@ class GPSD_Client():
         self.consumer.shutdown()
         self.thread.join()
 
-            
         
 if __name__ == "__main__":
     config_candidates=['traccar-client.ini', '/etc/traccar-client.ini']
