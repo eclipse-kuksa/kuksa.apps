@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
 ########################################################################
 # Copyright (c) 2018-2019 Robert Bosch GmbH
