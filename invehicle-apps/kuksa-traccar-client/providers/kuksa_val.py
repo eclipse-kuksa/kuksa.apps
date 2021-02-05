@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /usr/bin/env python
 
 ########################################################################
 # Copyright (c) 2020 Robert Bosch GmbH
@@ -18,8 +18,7 @@
 import os, sys, json
 import csv
 import time
-import threading, queue, ssl
-import asyncio, websockets, pathlib
+import threading
 from providers.kuksa.clientComm import VSSClientComm
 
 class Provider():
@@ -31,45 +30,17 @@ class Provider():
             print("Provider.kuksa_val section missing from configuration, exiting")
             sys.exit(-1)
         provider_config=config['Provider.kuksa_val']
-        self.sendMsgQueue = queue.Queue()
-        self.recvMsgQueue = queue.Queue()
-        self.client = VSSClientComm(self.sendMsgQueue, self.recvMsgQueue, provider_config)
+        self.client = VSSClientComm(provider_config)
         self.client.start()
         self.token = provider_config.get('token', "token.json")
-        self.authorize()
-        
-    def authorize(self):
-        if os.path.isfile(self.token):
-            with open(self.token, "r") as f:
-                self.token = f.readline()
-
-        req = {}
-        req["requestId"] = 1238
-        req["action"]= "authorize"
-        req["tokens"] = self.token
-        jsonDump = json.dumps(req)
-        self.sendMsgQueue.put(jsonDump)
-        resp = self.recvMsgQueue.get(timeout = 1)
-        print(resp)
+        self.client.authorize(self.token)
 
     def shutdown(self):
         self.client.stopComm()
 
-    def getValue(self, data, path):
-        if isinstance(data[path], float) or data[path].isnumeric():
-            return data[path]
-        return 0
-
 
     def getPosition(self):
-        req = {}
-        req["requestId"] = 1234
-        req["action"]= "get"
-        req["path"] = "Vehicle.Cabin.Infotainment.Navigation.CurrentLocation"
-        jsonDump = json.dumps(req)
-        print(jsonDump)
-        self.sendMsgQueue.put(jsonDump)
-        resp = self.recvMsgQueue.get(timeout = 1)
+        resp = self.client.getValue("Vehicle.Cabin.Infotainment.Navigation.CurrentLocation")
     
         position = { "valid": False }
         resp = json.loads(resp)
@@ -78,11 +49,11 @@ class Provider():
         try:
             data = resp['value']
             position = { "valid":True, 
-                "alt": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Altitude'),
-                "lat": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude'),
-                "lon": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude'),
-                "hdop": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Accuracy'),
-                "speed": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Speed')}
+                "alt": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Altitude'),
+                "lat": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude'),
+                "lon": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude'),
+                "hdop": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Accuracy'),
+                "speed": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Speed')}
         except TypeError as e:
             print("type error: " + str(e))
             pass
