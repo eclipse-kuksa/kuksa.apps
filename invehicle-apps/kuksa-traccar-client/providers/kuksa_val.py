@@ -38,22 +38,31 @@ class Provider():
     def shutdown(self):
         self.client.stopComm()
 
+    def getValue(self, data, path):
+        print("find " + path)
+        if path not in data:
+            print(path + " not found!")
+            return 0
+        if isinstance(data[path], float) or data[path].isnumeric():
+            return data[path]
+        return 0
 
     def getPosition(self):
         resp = self.client.getValue("Vehicle.Cabin.Infotainment.Navigation.CurrentLocation")
     
         position = { "valid": False }
+        print("resp: " + str(resp))
         resp = json.loads(resp)
-        print(resp)
+        print("resp: " + str(resp))
 
         try:
             data = resp['value']
             position = { "valid":True, 
-                "alt": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Altitude'),
-                "lat": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude'),
-                "lon": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude'),
-                "hdop": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Accuracy'),
-                "speed": self.client.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Speed')}
+                "alt": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Altitude'),
+                "lat": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Latitude'),
+                "lon": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Longitude'),
+                "hdop": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Accuracy'),
+                "speed": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Speed')}
         except TypeError as e:
             print("type error: " + str(e))
             pass
