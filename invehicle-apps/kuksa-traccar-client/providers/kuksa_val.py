@@ -19,6 +19,7 @@ import os, sys, json
 import csv
 import time
 import threading
+import traceback
 from providers.kuksa.clientComm import VSSClientComm
 
 class Provider():
@@ -39,12 +40,21 @@ class Provider():
         self.client.stopComm()
 
     def getValue(self, data, path):
-        print("find " + path)
-        if path not in data:
-            print(path + " not found!")
-            return 0
-        if isinstance(data[path], float) or data[path].isnumeric():
-            return data[path]
+        if path in data:
+            try:
+                return float(data[path])
+            except:
+                print(str(data[path]) + "is not numeric")
+                return 0
+        else:
+            for entry in data:
+                if path in entry:
+                    try:
+                        return float(entry[path])
+                    except:
+                        print(str(entry[path]) + "is not numeric")
+                        return 0
+        print(path + " not found!")
         return 0
 
     def getPosition(self):
@@ -65,12 +75,15 @@ class Provider():
                 "speed": self.getValue(data, 'Vehicle.Cabin.Infotainment.Navigation.CurrentLocation.Speed')}
         except TypeError as e:
             print("type error: " + str(e))
+            traceback.print_exc()
             pass
         except KeyError as e:
             print("key error: " + str(e))
+            traceback.print_exc()
             pass
         except :
             print("Unexpected error:", sys.exc_info())
+            traceback.print_exc()
             
         
         return position
