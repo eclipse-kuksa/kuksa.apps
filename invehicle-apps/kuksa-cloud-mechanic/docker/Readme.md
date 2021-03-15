@@ -16,6 +16,13 @@ and restart docker daemon using  "systemctl restart docker"
 
 https://github.com/docker/docker-ce/blob/master/components/cli/experimental/README.md
 
+
+**Note**: if this does not enable the docker buildx command for you (`docker buildx ls` results in an error message):
+* Check whether this directory exists in your installation: `~/.docker/cli-plugins`
+* This directory needs to contain a buildx binary, which you can download from here: https://github.com/docker/buildx/releases/
+* That binary (or a symlink to one) needs to be named docker-buildx - and make sure that it has the executable flag set!
+
+
 2. install  qemu-user-static package on the host machine
 
  use "sudo apt-get install qemu-user-static"
