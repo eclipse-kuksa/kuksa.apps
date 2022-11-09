@@ -12,6 +12,8 @@ Contributors:
 *****************************************************************************
 -->
 
+# THIS REPOSITORY HAS BEEN ARCHIVED, see [issue 42](https://github.com/eclipse/kuksa.apps/issues/42) for details.
+
 # Kuksa-Apps Repo
 
 This repository constains application use-cases used along with the Eclipse Kuksa environment to be distributed along with the appstore, hawkBit, and the invehicle platform.
