@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mycarLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MycarActivity"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/checkEngine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="191dp"
+        app:srcCompat="@drawable/check_engine" />
+
+    <EditText
+        android:id="@+id/speedView"
+        android:layout_width="151dp"
+        android:layout_height="122dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/rpmView"
+        android:layout_marginEnd="17dp"
+        android:ems="10"
+        android:inputType="none"
+        android:textColor="@color/colorPrimary"
+        android:background="@android:color/transparent"
+        android:textAlignment="center"
+        android:textSize="80dp" />
+
+    <EditText
+        android:id="@+id/rpmView"
+        android:layout_width="197dp"
+        android:layout_height="122dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:inputType="none"
+        android:textColor="@color/colorPrimary"
+        android:background="@android:color/transparent"
+        android:textAlignment="center"
+        android:textSize="80dp" />
+
+    <ProgressBar
+        android:id="@+id/fuelView"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="177dp"
+        android:layout_height="32dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="97dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="231dp"
+        android:text="RPM"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginEnd="68dp"
+        android:text="KMH"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fuelView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-97dp"
+        android:text="Fuel %"
+        android:textSize="20dp"/>
+
+
+</android.widget.RelativeLayout>

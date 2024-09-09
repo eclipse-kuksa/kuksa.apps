@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="40.115.61.255"
+        android:key="addressIF"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="InfluxDB IP-Address" />
+    <EditTextPreference
+        android:defaultValue="4711"
+        android:key="vehicleID"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Vehicle ID" />
+    <EditTextPreference
+        android:defaultValue="1.1.1.1"
+        android:key="addressDisp"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Hono-Dispath-Router IP-Address" />
+    <EditTextPreference
+        android:defaultValue="1.1.1.1"
+        android:key="addressAPPS"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="AppStore IP-Address" />
+    <EditTextPreference
+        android:defaultValue="1.1.1.1:5555"
+        android:key="addressTrac"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Traccar server IP-Address:Port" />
+</PreferenceScreen>
